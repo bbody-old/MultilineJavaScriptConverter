@@ -1,0 +1,2 @@
+# MultilineJavaScriptConvertor
+Multiline JavaScript string convertor
