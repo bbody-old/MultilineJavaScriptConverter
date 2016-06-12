@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Multiline Javascript Convertor</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Scripts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/ico" href="img/favicon.ico">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+  <div class="section hero">
+    <div class="container">
+      <div class="row">
+        <div class="twelve colum">
+          <h1 class="hero-heading">Multiline Javascript Convertor</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="one-half column">
+          <h2>Description</h2>
+          <p>Converts multiline text into a JavaScript multiline string. This includes both <a href="https://google.github.io/styleguide/javascriptguide.xml?showone=Multiline_string_literals#Multiline_string_literals">concatenated string in ECMA5</a> and the new <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals">template literal in ECMA6</a>.
+        </div>
+        <div class="one-half column">
+          <h2>Uses</h2>
+          <ul>
+            <li>Large Blocks of text</li>
+            <li>ASCII Art</li>
+            <li>HTML Code</li>
+          </ul>
+        </div>
+      <div class="row">
+        <div class="u-full-width">
+          <div class="row">
+              <h2>Input</h2>
+              <label>Text</label>
+              <textarea id="text" class="u-full-width" rows="20"></textarea>
+          </div>
+          <div class="row">
+            <div class="one-half column">
+              <label for="variable-name">Variable Name (Default <code>text</code>)</label>
+              <input class="u-full-width" type="text" placeholder="text" id="variable-name">
+            </div>
+            <div class="one-half column">
+              <label for="string-type">String type</label>
+              <select class="u-full-width" id="string-type">
+                <option value="ecma5double">Double quotes (ECMA5)</option>
+                <option value="ecma5single">Single quotes (ECMA5)</option>
+                <option value="ecma6">Template literals (ECMA6)</option>
+              </select>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+              <h2>Ouput</h2>
+              <label>JavaScript Code</label>
+              <textarea id="js-code" class="u-full-width" rows="20" readonly=""></textarea>
+              <input id="convert" class="button-primary" type="submit" value="Convert"/>
+              <input id="copy" class="button" value="Copy" data-clipboard-target="#js-code"/>
+              <input id="clear" class="button" value="Clear"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

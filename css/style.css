@@ -1,0 +1,23 @@
+.container{
+	padding-top: 50px;
+}
+
+textarea{
+	min-height: 250px;
+	font-family: 'Ubuntu Mono', "Lucida Console", Monaco, monospace;
+}
+
+h1.hero-heading{
+	text-align: center;
+}
+h2{
+	font-size: 3.2rem;
+}
+
+li{
+	margin-bottom: 0.25rem;
+}
+
+#js-code{
+	background-color: #F1F1F1;
+}
