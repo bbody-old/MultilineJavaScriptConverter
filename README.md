@@ -1,2 +1,2 @@
-# MultilineJavaScriptConvertor
-Multiline JavaScript string convertor
+# Multiline JavaScript Converter
+
