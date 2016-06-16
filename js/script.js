@@ -21,6 +21,11 @@ $(document).ready(function(){
   var ECMA5_SINGLE = "ecma5single";
   var ECMA5_DOUBLE = "ecma5double";
 
+  // Defaults
+  var DEFAULT_STRING_TYPE = ECMA5_DOUBLE;
+  var DEFAULT_VARIABLE_NAME = "text";
+
+
   // Initialize clipboard editing
   new Clipboard('#copy');
 
@@ -68,10 +73,14 @@ $(document).ready(function(){
     // Variable name
     var buffer = "var ";
     buffer += variableName;
-
-    // First line for string
     buffer += " = ";
-    buffer += quote(stringType, true);
+
+    return buffer;
+  }
+
+  function initStart(stringType){
+    // First line for string
+    var buffer = quote(stringType, true);
     buffer += quote(stringType);
     buffer += "\n";
 
@@ -79,39 +88,62 @@ $(document).ready(function(){
   }
 
   // Convert text to JavaScript Variable
-  function convertText(variableName, contents, stringType){
+  function convertText(variableName, contents, stringType, newlines, trim, semiColon){
     // Output buffer
     var converted = "";
 
     // Split input into an array based on their line
     var lineContents = contents.split(NEW_LINE);
 
-    // Intialize variable
-    converted += initVariable(variableName, stringType);
+    if (variableName.length > 0){
+        // Intialize variable
+        converted += initVariable(variableName, stringType);
+    } else {
+      converted += "\t";
+    }
+
+    converted += initStart(stringType);
 
     $.each(lineContents, function(index, value){
-      if (stringType !== ECMA6){
-        // Start the line
-        converted += LINE_START;
-
-        converted += quote(stringType);
+      if (trim){
+        value = value.trim();
       }
 
-      // Remove escaped characters
-      converted += escapeSpecialCharacters(value, stringType);
+      if (!(trim && value.length === 0)){
 
-      if (stringType !== ECMA6){
-        // Put in new line
-        converted += STRING_NEW_LINE;
+        if (stringType !== ECMA6){
+          // Start the line
+          converted += LINE_START;
+
+          converted += quote(stringType);
+        }
+
+        // Remove escaped characters
+        converted += escapeSpecialCharacters(value, stringType);
+
+        if (stringType !== ECMA6 && newlines){
+          // Put in new line
+          converted += STRING_NEW_LINE;
+        }
+
       }
 
       // If it is the last line, put in semi colon otherwise a newline
       if (lineContents.length - 1 !== index){
         converted += quote(stringType);
+        console.log(converted);
         converted += NEW_LINE;
       } else {
-        converted += quote(stringType, true);
-        converted += FINAL_SEMI_COLON;
+        //if (!trim){
+          converted += quote(stringType, true);
+        //}
+
+        if (trim && value.length === 0){
+          converted = converted.substring(0, converted.length - 2);
+        }
+        if (semiColon){
+          converted += FINAL_SEMI_COLON;
+        }
       }
     });
 
@@ -124,14 +156,23 @@ $(document).ready(function(){
 
     // Get the variable name, set default as "text"
     var variableName = $("#variable-name").val();
-    variableName = variableName ? variableName : "text";
+    variableName = variableName ? variableName : "";
 
     // Get the type of string wanted to be output
     var stringType = $("#string-type").val();
     stringType = stringType ? stringType : ECMA5_DOUBLE;
 
+    // Get whether newlines are needed
+    var newlines = !$("#no-newline").prop( "checked" );
+
+    // Get whether white spacing needs to be trimmed
+    var trim = $("#trim-padding").prop( "checked" );
+
+    // Get whether a semi-colon should be used or not
+    var semiColon = !$("#no-semi-colon").prop("checked");
+
     // Convert text
-    var converted = convertText(variableName, text, stringType);
+    var converted = convertText(variableName, text, stringType, newlines, trim, semiColon);
 
     // Write converted text to output box
     $("#js-code").val(converted);
@@ -147,7 +188,10 @@ $(document).ready(function(){
   $("#clear").click(function(){
     clearField($("#text"));
     clearField($("#js-code"));
-    clearField($("#variable-name"));
-    clearField($("#string-type"), ECMA5_DOUBLE);
+    clearField($("#variable-name"), DEFAULT_VARIABLE_NAME);
+    clearField($("#string-type"), DEFAULT_STRING_TYPE);
+    $("#trim-padding").prop('checked', false);
+    $("#no-newline").prop('checked', false);
+    $("no-semi-colon").prop('checked', false);
   });
 });

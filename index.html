@@ -68,13 +68,13 @@
         <div class="u-full-width">
           <div class="row">
               <h2>Input</h2>
-              <label>Text</label>
+              <label for="text">Text</label>
               <textarea id="text" class="u-full-width" rows="20"></textarea>
           </div>
           <div class="row">
             <div class="one-half column">
-              <label for="variable-name">Variable Name (Default <code>text</code>)</label>
-              <input class="u-full-width" type="text" placeholder="text" id="variable-name">
+              <label for="variable-name">Variable Name (If empty, no variable will be used)</label>
+              <input class="u-full-width" type="text" value="text" id="variable-name">
             </div>
             <div class="one-half column">
               <label for="string-type">String type</label>
@@ -86,8 +86,28 @@
             </div>
           </div>
           <div class="row">
+            <div class="one-third column">
+              <label for="no-newline">
+                <input id="no-newline" type="checkbox">
+                <span class="label-body">No Newlines</span>
+              </label>
+            </div>
+            <div class="one-third column">
+              <label for="trim-padding">
+                <input id="trim-padding" type="checkbox">
+                <span class="label-body">Trim padding</span>
+              </label>
+            </div>
+            <div class="one-third column">
+              <label for="no-semi-colon">
+                <input id="no-semi-colon" type="checkbox">
+                <span class="label-body">No semi-colon</span>
+              </label>
+            </div>
+          </div>
+          <div class="row">
               <h2>Ouput</h2>
-              <label>JavaScript Code</label>
+              <label for="js-code">JavaScript Code</label>
               <textarea id="js-code" class="u-full-width" rows="20" readonly=""></textarea>
               <input id="convert" class="button-primary" type="submit" value="Convert"/>
               <input id="copy" class="button" value="Copy" data-clipboard-target="#js-code"/>
