@@ -131,7 +131,6 @@ $(document).ready(function(){
       // If it is the last line, put in semi colon otherwise a newline
       if (lineContents.length - 1 !== index){
         converted += quote(stringType);
-        console.log(converted);
         converted += NEW_LINE;
       } else {
         //if (!trim){
