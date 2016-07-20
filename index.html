@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Multiline Javascript Converter</title>
+  <title>Multiline JavaScript Converter</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -15,8 +15,8 @@
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
-  <link href='//fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -26,7 +26,6 @@
 
   <!-- Scripts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
 
@@ -109,9 +108,9 @@
               <h2>Ouput</h2>
               <label for="js-code">JavaScript Code</label>
               <textarea id="js-code" class="u-full-width" rows="20" readonly=""></textarea>
-              <input id="convert" class="button-primary" type="submit" value="Convert"/>
+              <input id="convert" class="button-primary" type="submit" value="Convert" onclick="convert()"/>
               <input id="copy" class="button" value="Copy" data-clipboard-target="#js-code"/>
-              <input id="clear" class="button" value="Clear"/>
+              <input id="clear" class="button" type="button" value="Clear" onclick="clearAllFields()"/>
           </div>
         </div>
       </div>
@@ -127,8 +126,8 @@
               <p>Used <i>Skeleton CSS framework</i> for lightweight website styling.</p>
             </div>
             <div class="one-third column">
-              <h3><a href="https://jquery.com/">jQuery 3</a></h3>
-              <p>Used <i>jQuery v3.0.0</i> for handling the website's logic.</p>
+              <h3><a href="http://vanilla-js.com/">JavaScript</a></h3>
+              <p>Used <i>VanillaJS</i> for handling the website's logic.</p>
             </div>
             <div class="one-third column">
               <h3><a href="https://clipboardjs.com/">clipboard.js</a></h3>
