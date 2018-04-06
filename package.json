@@ -1,0 +1,36 @@
+{
+  "name": "multilinejavascriptconverter",
+  "friendly_name": "Multiline JavaScript Converter",
+  "version": "1.0.0",
+  "description": "Multiline JavaScript string converter",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-minify": "^0.3.0",
+    "gh-pages": "^1.1.0",
+    "node-sass": "^4.8.3",
+    "pug": "^2.0.3",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
+  },
+  "scripts": {
+    "serve": "http-server dist",
+    "build": "npm run css && npm run html && npm run js && npm run favicon",
+    "css": "node-sass scss/style.scss dist/css/style.css --output-style compressed --source-map dist/css",
+    "html": "node ./html-compile.js",
+    "js": "npx babel js/script.js --out-file dist/js/script.js --source-maps",
+    "favicon": "copy favicon.ico dist",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbody/MultilineJavaScriptConverter.git"
+  },
+  "author": "Brendon Body",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bbody/MultilineJavaScriptConverter/issues"
+  },
+  "homepage": "http://www.brendonbody.com/MultilineJavaScriptConverter/"
+}
