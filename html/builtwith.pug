@@ -1,0 +1,8 @@
+.u-full-width
+	.row
+		h2 Made with...
+	.row
+		each technology in builtwith
+			.one-third.column
+				h3 #[a(href= technology.link)= technology.name]
+				p Used #[i #{technology.name}] for #{technology.purpose}

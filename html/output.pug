@@ -1,0 +1,10 @@
+.u-full-width
+	.row
+		h2 Output
+	.row
+		label(for= "js-code") JavaScript Code
+		textarea(id= "js-code" class="u-full-width" rows="20" readonly="readonly")
+	.row
+		input(id="convert" class="button-primary" type="submit" value="Convert" onclick="convert()")
+		input(id="copy" class="button" type="button" value="Copy" data-clipboard-target="#js-code")
+		input(id="clear" class="button" type="button" value="Clear" onclick="clearAllFields()")
