@@ -1,8 +1,8 @@
 {
   "name": "multilinejavascriptconverter",
   "friendly_name": "Multiline JavaScript Converter",
-  "version": "1.0.0",
-  "description": "Multiline JavaScript string converter",
+  "version": "1.1.0",
+  "description": "Turns multiline text into safe JavaScript variables",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-polyfill": "^6.26.0",
@@ -10,9 +10,7 @@
     "babel-preset-minify": "^0.3.0",
     "gh-pages": "^1.1.0",
     "node-sass": "^4.8.3",
-    "pug": "^2.0.3",
-    "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14"
+    "pug": "^2.0.3"
   },
   "scripts": {
     "serve": "http-server dist",
@@ -32,5 +30,5 @@
   "bugs": {
     "url": "https://github.com/bbody/MultilineJavaScriptConverter/issues"
   },
-  "homepage": "http://www.brendonbody.com/MultilineJavaScriptConverter/"
+  "github": "https://github.com/bbody/MultilineJavaScriptConverter.git"
 }
