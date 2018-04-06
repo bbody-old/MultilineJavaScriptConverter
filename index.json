@@ -1,0 +1,35 @@
+{
+	"includes": {
+		"scripts": [
+			"//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js",
+			"js/script-compiled.js"
+		],
+		"stylesheets": [
+			"//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css",
+			"//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
+			"css/style.css"
+		],
+		"fonts": [
+			"//fonts.googleapis.com/css?family=Raleway:400,300,600",
+			"//fonts.googleapis.com/css?family=Ubuntu+Mono"
+		],
+		"favicon": "favicon.ico"
+	},
+	"builtwith": [
+		{
+			"name": "Skeleton",
+			"link": "http://getskeleton.com/",
+			"purpose": "lightweight website styling"
+		},
+		{
+			"name": "JavaScript",
+			"link": "http://vanilla-js.com/",
+			"purpose": "handling the website's logic"
+		},
+		{
+			"name": "clipboard.js",
+			"link": "https://clipboardjs.com/",
+			"purpose": "handling copying to clipboard"
+		}
+	]
+}

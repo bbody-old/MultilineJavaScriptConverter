@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		meta(name="description" content= package.description)
+		meta(name="author" content= package.author)
+		title= package.friendly_name
+		include html/stylesheets.pug
+	body
+		.section.hero
+			.container
+				include html/github_banner.pug
+				section#title.row
+					h1.hero-heading= package.friendly_name
+				section#description.row
+					include html/description.pug
+				section#form.row
+					include html/form.pug
+				section#output.row
+					include html/output.pug
+				section#builtwith.row
+					include html/builtwith.pug
+		include html/scripts.pug
