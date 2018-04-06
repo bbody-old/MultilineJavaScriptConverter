@@ -1,28 +1,28 @@
 // Constant variables
-var LINE_START = "\t+ ";
-var NEW_LINE = "\n";
-var STRING_NEW_LINE = "\\n";
-var FINAL_SEMI_COLON = ";";
-var ESCAPE_CHARACTER = "\\";
+const LINE_START = "\t+ ";
+const NEW_LINE = "\n";
+const STRING_NEW_LINE = "\\n";
+const FINAL_SEMI_COLON = ";";
+const ESCAPE_CHARACTER = "\\";
 
 // Special characters
-var DOUBLE_QUOTE = "\"";
-var SINGLE_QUOTE = "\'";
-var BACKTICK = "`";
+const DOUBLE_QUOTE = "\"";
+const SINGLE_QUOTE = "\'";
+const BACKTICK = "`";
 
 // Escaped special characters
-var ESCAPED_DOUBLE_QUOTE = "\\\"";
-var ESCAPED_SINGLE_QUOTE = "\\\'";
-var ESCAPED_BACKTICK = "\\`";
+const ESCAPED_DOUBLE_QUOTE = "\\\"";
+const ESCAPED_SINGLE_QUOTE = "\\\'";
+const ESCAPED_BACKTICK = "\\`";
 
 // Types
-var ECMA6 = "ecma6";
-var ECMA5_SINGLE = "ecma5single";
-var ECMA5_DOUBLE = "ecma5double";
+const ECMA6 = "ecma6";
+const ECMA5_SINGLE = "ecma5single";
+const ECMA5_DOUBLE = "ecma5double";
 
 // Defaults
-var DEFAULT_STRING_TYPE = ECMA5_DOUBLE;
-var DEFAULT_VARIABLE_NAME = "text";
+const DEFAULT_STRING_TYPE = ECMA5_DOUBLE;
+const DEFAULT_VARIABLE_NAME = "text";
 
 // Escape any backslashes
 function escapeBackslash(value){
