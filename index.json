@@ -5,8 +5,7 @@
 		],
 		"scripts_async": [
 			"//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js",
-			"//www.googletagmanager.com/gtag/js?id=UA-117132942-1",
-			"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+			"https://www.googletagmanager.com/gtag/js?id=UA-117132942-1"
 		],
 		"stylesheets": [
 			"//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css",

@@ -7,19 +7,23 @@
     "babel-cli": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-minify": "^0.3.0",
     "gh-pages": "^1.1.0",
+    "mocha": "^5.0.5",
     "node-sass": "^4.8.3",
     "pug": "^2.0.3"
   },
   "scripts": {
+    "setup": "npm install -g mocha && npm install -g http-server && npm install -g node-sass",
+    "test": "mocha",
     "serve": "http-server dist",
     "build": "npm run css && npm run html && npm run js && npm run favicon",
     "css": "node-sass scss/style.scss dist/css/style.css --output-style compressed --source-map dist/css",
     "html": "node ./html-compile.js",
     "js": "npx babel js/script.js --out-file dist/js/script.js --source-maps",
     "favicon": "copy favicon.ico dist",
-    "deploy": "gh-pages -d dist"
+    "deploy": "echo 'jsstringconverter.bbody.io' > ./dist/CNAME && gh-pages -d dist"
   },
   "repository": {
     "type": "git",
