@@ -1,6 +1,8 @@
-textarea{
+@import "./vars";
+
+textarea {
 	min-height: 250px;
-	font-family: 'Ubuntu Mono', "Lucida Console", Monaco, monospace;
+	font-family: $code_font_stack;
 }
 
 h1.hero-heading {
@@ -20,16 +22,18 @@ li {
 }
 
 #js-code {
-	background-color: #F1F1F1;
+	background-color: $code_bg_color;
 }
+
 section {
 	&#builtwith {
-		border-top: 1px solid #E1E1E1;
+		border-top: 1px solid $border_color;
 		padding-top: 3.5rem;
 		margin-top: 3rem;
 	}
+
 	&#description {
-		border-bottom: 1px solid #E1E1E1;
+		border-bottom: 1px solid $border_color;
 		margin-bottom: 3.5rem;
 		padding-bottom: 3rem;
 	}
