@@ -3,16 +3,23 @@
   "friendly_name": "Multiline JavaScript Converter",
   "version": "1.1.0",
   "description": "Turns multiline text into safe JavaScript variables",
+  "contributors": [
+    {
+      "name": "Brendon Body"
+    }
+  ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-minify": "^0.3.0",
+    "chai": "^4.1.2",
     "gh-pages": "^1.1.0",
     "mocha": "^5.0.5",
     "node-sass": "^4.8.3",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "requirejs": "^2.3.5"
   },
   "scripts": {
     "setup": "npm install -g mocha && npm install -g http-server && npm install -g node-sass",
@@ -21,7 +28,9 @@
     "build": "npm run css && npm run html && npm run js && npm run favicon",
     "css": "node-sass scss/style.scss dist/css/style.css --output-style compressed --source-map dist/css",
     "html": "node ./html-compile.js",
-    "js": "npx babel js/script.js --out-file dist/js/script.js --source-maps",
+    "js": "npm run js:build && npm run js:compile",
+    "js:build": "browserify src/script.js > dist/js/script.js",
+    "js:compile": "npx babel dist/js/script.js --out-file dist/js/script.js --source-maps",
     "favicon": "copy favicon.ico dist",
     "deploy": "echo 'jsstringconverter.bbody.io' > ./dist/CNAME && gh-pages -d dist"
   },
