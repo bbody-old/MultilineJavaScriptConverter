@@ -33,6 +33,21 @@
 			"name": "clipboard.js",
 			"link": "https://clipboardjs.com/",
 			"purpose": "handling copying to clipboard"
+		},
+		{
+			"name": "Browserify",
+			"link": "http://browserify.org/",
+			"purpose": "building JavaScript"
+		},
+		{
+			"name": "PugJS",
+			"link": "https://pugjs.org",
+			"purpose": "templating HTML"
+		},
+		{
+			"name": "Mocha",
+			"link": "https://mochajs.org/",
+			"purpose": "unit testing code"
 		}
 	]
 }

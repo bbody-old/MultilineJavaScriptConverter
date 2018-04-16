@@ -11,8 +11,8 @@
 			label(for="string-type") String type
 			- var types = {"ecma5double": "Double quotes (ECMA5)", "ecma5single": "Single quotes (ECMA5)", "ecma6": "Template literals (ECMA6)"}
 			select(class="u-full-width" id="string-type")
-				each value, title in types
-					option(value= key)= value
+				each title, value in types
+					option(value= value, selected= value == "ecma5double")= title
 	.row
 		.one-third.column
 			label(for= "no-newline")

@@ -2,4 +2,10 @@ each script in includes.scripts
 	script(type='text/javascript' src= script)
 each script in includes.scripts_async
 	script(type='text/javascript' src= script async)
-include ./analytics.html
+include ./analytics.pug
+
+script.
+	window.onload=function(){
+		// Initialize clipboard editing
+		new Clipboard('#copy');
+	}
