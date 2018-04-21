@@ -30,12 +30,12 @@ module.exports = {
   ECMA5_DOUBLE: ECMA5_DOUBLE,
 
   // Escape any backslashes
-  escapeBackslash: function(value){
+  escapeBackslash: value => {
     return value.replace(/\\/g, "\\\\");
   },
 
   // Escape any special characters that will effect Javascript
-  escapeSpecialCharacters: function(line, stringType){
+  escapeSpecialCharacters: (line, stringType) => {
     let value = this.escapeBackslash(line);
 
     if (stringType !== ECMA6){
@@ -53,21 +53,20 @@ module.exports = {
   },
 
   // Return the type of quote based on string type and if it is the end/start
-  quote: function(stringType, wrapper = false){
-
+  quote: (stringType, wrapper = false) => {
     if (stringType === ECMA5_DOUBLE){
       return DOUBLE_QUOTE;
     } else if (stringType === ECMA5_SINGLE){
       return SINGLE_QUOTE;
     } else if (stringType === ECMA6 && wrapper){
       return BACKTICK;
-    } else {
-      return "";
     }
+      
+    return "";
   },
 
   // Initialize the variable line
-  initVariable: function(variableName, stringType){
+  initVariable: (variableName, stringType) => {
     // Variable name
     let buffer = "var ";
     buffer += variableName;
@@ -76,7 +75,7 @@ module.exports = {
     return buffer;
   },
 
-  initStart: function(stringType){
+  initStart: stringType => {
     // First line for string
     let buffer = this.quote(stringType, true);
     buffer += this.quote(stringType);
@@ -86,7 +85,7 @@ module.exports = {
   },
     
   // Convert text to JavaScript Variable
-  convertText: function(variableName, contents, stringType, newlines, trim, semiColon){
+  convertText: (variableName, contents, stringType, newlines, trim, semiColon) => {
     let self = this;
     // Output buffer
     let converted = "";
@@ -131,13 +130,12 @@ module.exports = {
         converted += self.quote(stringType);
         converted += NEW_LINE;
       } else {
-        //if (!trim){
-          converted += self.quote(stringType, true);
-        //}
+        converted += self.quote(stringType, true);
 
         if (trim && value.length === 0){
           converted = converted.substring(0, converted.length - 2);
         }
+
         if (semiColon){
           converted += FINAL_SEMI_COLON;
         }
@@ -149,7 +147,7 @@ module.exports = {
   },
 
   // Clear the field with empty string unless a default selection is provided
-  clearField: function(field, defaultSelection = ""){
+  clearField: (field, defaultSelection = "") => {
     field.value = defaultSelection !== null && defaultSelection.toString ? defaultSelection.toString() : "";
   }
 };
