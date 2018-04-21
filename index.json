@@ -25,9 +25,9 @@
 			"purpose": "lightweight website styling"
 		},
 		{
-			"name": "JavaScript",
-			"link": "http://vanilla-js.com/",
-			"purpose": "handling the website's logic"
+			"name": "Babel",
+			"link": "https://babeljs.io/",
+			"purpose": "converting JS to ECMA5"
 		},
 		{
 			"name": "clipboard.js",
