@@ -22,7 +22,7 @@
     "requirejs": "^2.3.5"
   },
   "scripts": {
-    "setup": "npm install -g mocha && npm install -g http-server && npm install -g node-sass",
+    "setup": "npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel",
     "test": "mocha",
     "serve": "http-server dist",
     "build": "npm run css && npm run html && npm run js && npm run favicon",
