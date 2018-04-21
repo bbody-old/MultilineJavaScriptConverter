@@ -1,12 +1,11 @@
 let assert = require('chai').assert;
 let stringConverter = require('../src/converter');
 
-// Types
-const ECMA6 = "ecma6";
-const ECMA5_SINGLE = "ecma5single";
-const ECMA5_DOUBLE = "ecma5double";
-
 describe('quote', function () {
+    const ECMA6 = "ecma6";
+    const ECMA5_SINGLE = "ecma5single";
+    const ECMA5_DOUBLE = "ecma5double";
+
 	it('should return single quote', function () {
         assert.equal(stringConverter.quote(ECMA5_SINGLE), '\'');
     });
