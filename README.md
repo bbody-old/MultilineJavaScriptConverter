@@ -35,12 +35,12 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 `npm run test`
 
 ## Built with
-- **Skeleton** - for basic CSS framework
-- **clipboard.js** - for copying text to clipboard
-- **PugJS** - for HTML templating
-- **Mocha** - for unit testing
-- **Browserify** - for using require feature to enable better modularity of JavaScript
-- **Babel** - for converting to ECMA5 code for browser
+- [Skeleton](http://getskeleton.com/) - for basic CSS framework
+- [Babel](https://babeljs.io/) - for converting to ECMA5 code for browser
+- [clipboard.js](https://clipboardjs.com/) - for copying text to clipboard
+- [Browserify](http://browserify.org/) - for using require feature to enable better modularity of JavaScript
+- [PugJS](https://pugjs.org) - for HTML templating
+- [Mocha](https://mochajs.org/) - for unit testing
 
 ## Bugs and suggestions
 If you find any bugs or have any suggestions on how to improve Multiline JavaScript Converter please post in the [Github issues](https://github.com/bbody/MultilineJavaScriptConverter/issues).
