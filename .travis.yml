@@ -4,13 +4,12 @@ node_js:
 dist: trusty
 before_script:
 - npm install
+- npm install mocha
 script:
-- gulp test:karma
+- npm run build
+- npm run test
 cache:
   directories:
   - node_modules
 env:
 - CXX=g++-4.8 CC=gcc-4.8
-before_deploy:
-  - npm run build
-  - npm run test
