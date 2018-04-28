@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/bbody/MultilineJavaScriptConverter.svg?branch=master)](https://travis-ci.org/bbody/MultilineJavaScriptConverter)
+[![Build Status](https://travis-ci.org/bbody/MultilineJavaScriptConverter.svg?branch=master)](https://travis-ci.org/bbody/MultilineJavaScriptConverterMultilineJavaScriptConverter)
+[![Coverage Status](https://coveralls.io/repos/github/bbody/MultilineJavaScriptConverter/badge.svg)](https://coveralls.io/github/bbody/MultilineJavaScriptConverter)
 
 # Multiline JavaScript Converter
 ## Description
