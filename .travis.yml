@@ -6,6 +6,8 @@ before_script:
 - npm install
 - npm install mocha
 - npm install browserify
+- mkdir dist
+- mkdir dist/js
 script:
 - npm run build
 - npm run test
