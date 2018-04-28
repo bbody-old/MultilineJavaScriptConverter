@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bbody/MultilineJavaScriptConverter.svg?branch=master)](https://travis-ci.org/bbody/MultilineJavaScriptConverter)
+
 # Multiline JavaScript Converter
 ## Description
 Multiline JavaScript Converter is a tool to convert strings into JavaScript safe text. It is able to account for new lines, special characters and able to produce multiple string types.
@@ -7,7 +9,7 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 ## Getting setup
 1. Download repository
 2. Run `npm install`
-3. Install [mocha](https://www.npmjs.com/package/mocha), [browserify](https://www.npmjs.com/package/browserify), [http-server](https://www.npmjs.com/package/http-server) and [babel](https://www.npmjs.com/package/Babel) or run `npm run setup`
+3. Run `npm run setup` to install dependencies
 
 ### Run site
 `npm serve`
