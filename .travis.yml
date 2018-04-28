@@ -25,3 +25,4 @@ deploy:
     repo: bbody/MultilineJavaScriptConverter
     on:
       branch: master
+after_success: npm run coverage
