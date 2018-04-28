@@ -15,3 +15,13 @@ cache:
   - node_modules
 env:
 - CXX=g++-4.8 CC=gcc-4.8
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    local_dir: ./dist
+    github_token: $GITHUB_TOKEN
+    target_branch: gh-pages
+    fqdn: jsstringconverter.bbody.io
+    repo: bbody/MultilineJavaScriptConverter
+    on:
+      branch: master
