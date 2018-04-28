@@ -5,6 +5,7 @@ dist: trusty
 before_script:
 - npm install
 - npm install mocha
+- npm install browserify
 script:
 - npm run build
 - npm run test
