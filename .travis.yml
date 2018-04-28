@@ -4,10 +4,7 @@ node_js:
 dist: trusty
 before_script:
 - npm install
-- npm install npx
-- npm install mocha
-- npm install browserify
-- npm install copy
+- npm run setup
 - mkdir dist
 - mkdir dist/js
 script:
