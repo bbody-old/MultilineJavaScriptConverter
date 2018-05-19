@@ -46,5 +46,6 @@
   "bugs": {
     "url": "https://github.com/bbody/MultilineJavaScriptConverter/issues"
   },
-  "github": "https://github.com/bbody/MultilineJavaScriptConverter.git"
+  "github": "https://github.com/bbody/MultilineJavaScriptConverter.git",
+  "theme_color": "#87c0b0"
 }
