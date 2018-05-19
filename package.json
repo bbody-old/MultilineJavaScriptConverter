@@ -24,17 +24,17 @@
     "requirejs": "^2.3.5"
   },
   "scripts": {
-    "setup": "npm install -g mocha npx && npm install copy && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify",
+    "setup": "npm install -g mocha npx && npm install copyfiles -g && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify",
     "test": "nyc --reporter=text mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "serve": "http-server dist",
     "build": "npm run css && npm run html && npm run js && npm run favicon",
     "css": "node-sass scss/style.scss dist/css/style.css --output-style compressed --source-map dist/css",
     "html": "node ./html-compile.js",
+    "favicon": "copyfiles -f favicons/*.* dist/",
     "js": "npm run js:build && npm run js:compile",
     "js:build": "browserify src/script.js > dist/js/script.js",
     "js:compile": "npx babel dist/js/script.js --out-file dist/js/script.js --source-maps",
-    "favicon": "copy favicon.ico dist",
     "deploy": "echo 'jsstringconverter.bbody.io' > ./dist/CNAME && gh-pages -d dist"
   },
   "repository": {
