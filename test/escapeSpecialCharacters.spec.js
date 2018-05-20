@@ -32,12 +32,12 @@ describe('escapeSpecialCharacters', function () {
 	    });
 
 		it('should return handle string literal characters', function () {
-	        assert.equal(stringConverter.escapeSpecialCharacters('"', ECMA5_SINGLE), '\\\"');
+	        assert.equal(stringConverter.escapeSpecialCharacters('"', ECMA5_SINGLE), '"');
 	        assert.equal(stringConverter.escapeSpecialCharacters("'", ECMA5_SINGLE), "\\\'");
 	    });
 
 	    it('should return handle other types of string identifiers', function () {
-	        assert.equal(stringConverter.escapeSpecialCharacters('`"', ECMA5_SINGLE), '`\\\"');
+	        assert.equal(stringConverter.escapeSpecialCharacters('`"', ECMA5_SINGLE), '`"');
 	        assert.equal(stringConverter.escapeSpecialCharacters("`'", ECMA5_SINGLE), "`\\\'");
 	    });
 	});
@@ -53,12 +53,12 @@ describe('escapeSpecialCharacters', function () {
 
 		it('should return handle string literal characters', function () {
 	        assert.equal(stringConverter.escapeSpecialCharacters('"', ECMA5_DOUBLE), '\\\"');
-	        assert.equal(stringConverter.escapeSpecialCharacters("'", ECMA5_DOUBLE), "\\\'");
+	        assert.equal(stringConverter.escapeSpecialCharacters("'", ECMA5_DOUBLE), "'");
 	    });
 
 	    it('should return handle other types of string identifiers', function () {
 	        assert.equal(stringConverter.escapeSpecialCharacters('`"', ECMA5_DOUBLE), '`\\\"');
-	        assert.equal(stringConverter.escapeSpecialCharacters("`'", ECMA5_DOUBLE), "`\\\'");
+	        assert.equal(stringConverter.escapeSpecialCharacters("`'", ECMA5_DOUBLE), "`'");
 	    });
 	});
 });

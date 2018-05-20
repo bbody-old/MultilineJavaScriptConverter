@@ -12,8 +12,8 @@ const BACKTICK = `\``;
 
 // Escaped special characters
 const ESCAPED_DOUBLE_QUOTE = "\\\"";
-const ESCAPED_SINGLE_QUOTE = "\\\'";
-const ESCAPED_BACKTICK = "\\`";
+const ESCAPED_SINGLE_QUOTE = '\\\'';
+const ESCAPED_BACKTICK = `\\\``;
 
 // Types
 const ECMA6 = "ecma6";
@@ -33,10 +33,10 @@ let escapeBackslash = value => {
 let escapeSpecialCharacters = (line, stringType) => {
   let value = escapeBackslash(line);
 
-  if (stringType !== ECMA6){
+  if (stringType === ECMA5_DOUBLE){
     // Escape double quotes
     value = value.replace(/"/g, ESCAPED_DOUBLE_QUOTE);
-
+  } else if (stringType === ECMA5_SINGLE){
     // Escape single quotes
     value = value.replace(/'/g, ESCAPED_SINGLE_QUOTE);
   } else {
@@ -81,11 +81,31 @@ let initVariable = (variableName, stringType) => {
   return buffer;
 };
 
-let initStart = stringType => {
+let getStart = (stringType, variableName) => {
   // First line for string
+  let buffer = "";
+
+  if (variableName && variableName.length){
+    if (stringType === ECMA6){
+      buffer += `const ${variableName} = `;
+    } else {``
+      buffer += `var ${variableName} = `;
+    }
+  } else {
+    buffer += '\t';
+  }
+
+  buffer += quote(stringType, true);
+
+  return buffer;
+};
+
+let getEnd = (stringType, semiColon = true) => {
   let buffer = quote(stringType, true);
-  buffer += quote(stringType);
-  buffer += "\n";
+
+  if (semiColon){
+    buffer += FINAL_SEMI_COLON;
+  }
 
   return buffer;
 };
@@ -93,62 +113,32 @@ let initStart = stringType => {
 // Convert text to JavaScript Variable
 let convertText = (variableName, contents, stringType, newlines, trim, semiColon) => {
   // Output buffer
-  let converted = "";
+  let buffer = getStart(stringType, variableName);
 
-  // Split input into an array based on their line
   const lineContents = contents.split(NEW_LINE);
 
-  if (variableName.length > 0){
-      // Intialize variable
-      converted += initVariable(variableName, stringType);
-  } else {
-    converted += "\t";
-  }
+  lineContents.forEach((value, count) => {
 
-  converted += initStart(stringType);
-  lineContents.forEach(function(value, count){
     if (trim){
       value = value.trim();
     }
 
-    if (!(trim && value.length === 0)){
+    buffer += escapeSpecialCharacters(value, stringType);
+
+    if (lineContents.length - 1 !== count){
+      buffer += quote(stringType);
 
       if (stringType !== ECMA6){
-        // Start the line
-        converted += LINE_START;
-
-        converted += quote(stringType);
-      }
-
-      // Remove escaped characters
-      converted += escapeSpecialCharacters(value, stringType);
-
-      if (stringType !== ECMA6 && newlines){
-        // Put in new line
-        converted += STRING_NEW_LINE;
-      }
-
-    }
-
-    // If it is the last line, put in semi colon otherwise a newline
-    if (lineContents.length - 1 !== count){
-      converted += quote(stringType);
-      converted += NEW_LINE;
-    } else {
-      converted += quote(stringType, true);
-
-      if (trim && value.length === 0){
-        converted = converted.substring(0, converted.length - 2);
-      }
-
-      if (semiColon){
-        converted += FINAL_SEMI_COLON;
+        buffer += `${NEW_LINE}${LINE_START}${quote(stringType)}`;
+      } else {
+        buffer += `\n`;
       }
     }
-
   });
+  
+  buffer += getEnd(stringType, semiColon);
 
-  return converted;
+  return buffer;
 };
 
 // Clear the field with empty string unless a default selection is provided
@@ -156,6 +146,7 @@ let clearField = (field, defaultSelection = "") => {
   field.value = defaultSelection !== null && defaultSelection.toString ? defaultSelection.toString() : "";
 };
 
+/* istanbul ignore next */
 module.exports = {
   // Constants
   DEFAULT_STRING_TYPE: DEFAULT_STRING_TYPE,
@@ -167,7 +158,8 @@ module.exports = {
   escapeSpecialCharacters: escapeSpecialCharacters,
   quote: quote,
   initVariable: initVariable,
-  initStart: initStart,
+  getStart: getStart,
+  getEnd: getEnd,
   convertText: convertText,
   clearField: clearField
 };
