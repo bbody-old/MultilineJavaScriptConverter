@@ -1,3 +1,4 @@
+// jshint esversion: 6
 // Constant variables
 const NEW_LINE = "\n";
 const TAB = "\t";
@@ -89,7 +90,7 @@ let getStart = (stringType, variableName) => {
   if (variableName && variableName.length){
     if (stringType === ECMA6){
       buffer += `const ${variableName} = `;
-    } else {``
+    } else {
       buffer += `var ${variableName} = `;
     }
   } else {
