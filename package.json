@@ -17,6 +17,7 @@
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
     "gh-pages": "^1.1.0",
+    "jshint": "^2.9.5",
     "mocha": "^5.0.5",
     "node-sass": "^4.8.3",
     "nyc": "^11.7.1",
@@ -24,8 +25,9 @@
     "requirejs": "^2.3.5"
   },
   "scripts": {
-    "setup": "npm install -g mocha npx && npm install copyfiles -g && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify",
-    "test": "nyc --reporter=text mocha",
+    "setup": "npm install -g mocha npx && npm install copyfiles -g && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify && npm install -g jshint",
+    "test": "npm run mocha && npm run jshint",
+    "mocha": "nyc --reporter=text mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "serve": "http-server dist",
     "build": "npm run css && npm run html && npm run js && npm run favicon",
@@ -37,6 +39,7 @@
     "js:build": "browserify src/script.js > dist/js/script.js",
     "js:compile": "npx babel dist/js/script.js --out-file dist/js/script.js --source-maps",
     "js:compile:prod": "npx babel dist/js/script.js",
+    "jshint": "jshint src/script.js && jshint src/converter.js",
     "deploy": "echo 'jsstringconverter.bbody.io' > ./dist/CNAME && delete dist/js/script.js.map && npm run js:prod && gh-pages -d dist"
   },
   "repository": {
