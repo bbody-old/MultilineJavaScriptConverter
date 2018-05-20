@@ -22,7 +22,7 @@ describe('getStart', () => {
         assert.equal(stringConverter.getStart(ECMA5_SINGLE, 'someVariable'), "var someVariable = '");
     });
 
-    it('should return handle double quote string', function () {
+    it('should return handle double quote string', () => {
         assert.equal(stringConverter.getStart(ECMA5_DOUBLE, ''), '\t"');
         assert.equal(stringConverter.getStart(ECMA5_DOUBLE), '\t"');
         assert.equal(stringConverter.getStart(ECMA5_DOUBLE, null), '\t"');

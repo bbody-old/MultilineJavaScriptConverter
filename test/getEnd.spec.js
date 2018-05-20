@@ -16,12 +16,12 @@ describe('getEnd', () => {
         assert.equal(stringConverter.getEnd(ECMA5_SINGLE, false), "'");
     });
 
-    it('should return handle double quote string', function () {
+    it('should return handle double quote string', () => {
         assert.equal(stringConverter.getEnd(ECMA5_DOUBLE, true), '";');
         assert.equal(stringConverter.getEnd(ECMA5_DOUBLE, false), '"');
     });
 
-    it('should return handle no argument', function () {
+    it('should return handle no argument', () => {
         assert.equal(stringConverter.getEnd(), "';");
         assert.equal(stringConverter.getEnd(null), "';");
         assert.equal(stringConverter.getEnd(''), "';");
