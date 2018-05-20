@@ -1,0 +1,8 @@
+{
+  "esversion": 6,
+  "globalstrict": false,
+  "globals": {
+    "document": true,
+    "require": true
+  }
+}
