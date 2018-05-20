@@ -1,6 +1,5 @@
 {
   "name": "multilinejavascriptconverter",
-  "friendly_name": "Multiline JavaScript Converter",
   "version": "1.1.0",
   "description": "Turns multiline text into safe JavaScript variables",
   "contributors": [
@@ -50,7 +49,5 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bbody/MultilineJavaScriptConverter/issues"
-  },
-  "github": "https://github.com/bbody/MultilineJavaScriptConverter.git",
-  "theme_color": "#87c0b0"
+  }
 }

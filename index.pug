@@ -5,7 +5,7 @@ html(lang="en")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		meta(name="description" content= package.description)
 		meta(name="author" content= package.author)
-		title= package.friendly_name
+		title= friendly_name
 		include html/favicons.pug
 		include html/stylesheets.pug
 	body
@@ -13,7 +13,7 @@ html(lang="en")
 			.container
 				include html/github_banner.pug
 				section#title.row
-					h1.hero-heading= package.friendly_name
+					h1.hero-heading= friendly_name
 				section#description.row
 					include html/description.pug
 				section#form.row

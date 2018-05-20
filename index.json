@@ -49,5 +49,8 @@
 			"link": "https://mochajs.org/",
 			"purpose": "unit testing code"
 		}
-	]
+	],
+	"github": "https://github.com/bbody/MultilineJavaScriptConverter.git",
+	"theme_color": "#87c0b0",
+	"friendly_name": "Multiline JavaScript Converter"
 }
