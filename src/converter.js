@@ -1,4 +1,3 @@
-// jshint esversion: 6
 // Constant variables
 const NEW_LINE = "\n";
 const TAB = "\t";

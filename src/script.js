@@ -1,7 +1,6 @@
-// jshint esversion: 6
 const stringConverter = require('./converter');
 
-window.convert = () => {
+let convert = () => {
   // Get input content
   const text = document.getElementById("text").value;
 
@@ -27,7 +26,7 @@ window.convert = () => {
   document.getElementById("js-code").value = converted;
 };
 
-window.clearAllFields = () => {
+let clearAllFields = () => {
   // Clear all fields
   stringConverter.clearField(document.getElementById("text"));
   stringConverter.clearField(document.getElementById("js-code"));
