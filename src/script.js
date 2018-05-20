@@ -1,6 +1,6 @@
 const stringConverter = require('./converter');
 
-window.convert = function(){
+window.convert = () => {
   // Get input content
   const text = document.getElementById("text").value;
 
@@ -26,7 +26,7 @@ window.convert = function(){
   document.getElementById("js-code").value = converted;
 };
 
-window.clearAllFields = function(){
+window.clearAllFields = () => {
   // Clear all fields
   stringConverter.clearField(document.getElementById("text"));
   stringConverter.clearField(document.getElementById("js-code"));

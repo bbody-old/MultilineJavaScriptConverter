@@ -82,8 +82,8 @@ let initVariable = (variableName, stringType) => {
   return buffer;
 };
 
+// Get first line
 let getStart = (stringType, variableName) => {
-  // First line for string
   let buffer = "";
 
   if (variableName && variableName.length){
@@ -101,6 +101,7 @@ let getStart = (stringType, variableName) => {
   return buffer;
 };
 
+// Get end of line
 let getEnd = (stringType, semiColon = true) => {
   let buffer = quote(stringType, true);
 
