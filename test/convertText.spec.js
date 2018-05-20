@@ -7,7 +7,7 @@ describe('convertText', function () {
 	const ECMA5_DOUBLE = "ecma5double";
 
     describe('Empty content', function () {
-        describe('ECMA6', function(){
+        describe('ECMA6', () => {
             it('Base example', function () {
                 let results = stringConverter.convertText('someVariable', '', ECMA6, true, false, true);
 
@@ -27,7 +27,7 @@ describe('convertText', function () {
             });
         });
 
-        describe('ECMA5 Single Quote', function(){
+        describe('ECMA5 Single Quote', () => {
             it('Base example', function () {
                 let results = stringConverter.convertText('someVariable', '', ECMA5_SINGLE, true, false, true);
 
@@ -47,7 +47,7 @@ describe('convertText', function () {
             });
         });
 
-        describe('ECMA5 Double Quote', function(){
+        describe('ECMA5 Double Quote', () => {
             it('Base example', function () {
                 let results = stringConverter.convertText('someVariable', '', ECMA5_DOUBLE, true, false, true);
 
@@ -69,7 +69,7 @@ describe('convertText', function () {
     });
 
     describe('Single line of content', function () {
-        describe('ECMA6', function(){
+        describe('ECMA6', () => {
             it('Base example', function () {
                 let results = stringConverter.convertText('someVariable', 'some content', ECMA6, true, false, true);
 
@@ -89,7 +89,7 @@ describe('convertText', function () {
             });
         });
 
-        describe('ECMA5 Single Quote', function(){
+        describe('ECMA5 Single Quote', () => {
             it('Base example', function () {
                 let results = stringConverter.convertText('someVariable', 'some content', ECMA5_SINGLE, true, false, true);
 
@@ -109,7 +109,7 @@ describe('convertText', function () {
             });
         });
         
-        describe('ECMA5 Double Quote', function(){
+        describe('ECMA5 Double Quote', () => {
             it('Base example', function () {
                 let results = stringConverter.convertText('someVariable', 'some content', ECMA5_DOUBLE, true, false, true);
 
@@ -133,7 +133,7 @@ describe('convertText', function () {
     describe('Multiple line content', function () {
         const multiLineContent = 'Something\nmulti\nline';
 
-        describe('ECMA6', function(){
+        describe('ECMA6', () => {
             it('Base example', function () {
                 let results = stringConverter.convertText('someVariable', multiLineContent, ECMA6, true, false, true);
 
@@ -153,7 +153,7 @@ describe('convertText', function () {
             });
         });
 
-        describe('ECMA5 Single Quote', function(){
+        describe('ECMA5 Single Quote', () => {
             it('Base example', function () {
                 let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_SINGLE, true, false, true);
 
@@ -173,7 +173,7 @@ describe('convertText', function () {
             });
         });
         
-        describe('ECMA5 Double Quote', function(){
+        describe('ECMA5 Double Quote', () => {
             it('Base example', function () {
                 let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_DOUBLE, true, false, true);
 
@@ -197,7 +197,7 @@ describe('convertText', function () {
     describe('Multiple line of content which needs to be escaped', function () {
         const multiLineContent = '`\n\'\n"';
 
-        describe('ECMA6', function(){
+        describe('ECMA6', () => {
             const multiLineContentExpected = '\\\`\n\'\n"';
             it('Base example', function () {
                 let results = stringConverter.convertText('someVariable', multiLineContent, ECMA6, true, false, true);
@@ -218,7 +218,7 @@ describe('convertText', function () {
             });
         });
 
-        describe('ECMA5 Single Quote', function(){
+        describe('ECMA5 Single Quote', () => {
             const multiLineContentExpected = "'`'\n\t+ '\\\''\n\t+ '\"'";
 
             it('Base example', function () {
@@ -240,7 +240,7 @@ describe('convertText', function () {
             });
         });
         
-        describe('ECMA5 Double Quote', function(){
+        describe('ECMA5 Double Quote', () => {
             const multiLineContentExpected = '"`"\n\t+ "\'"\n\t+ "\\\""';
 
             it('Base example', function () {
@@ -257,6 +257,216 @@ describe('convertText', function () {
 
             it('Base example with no semi-colon', function () {
                 let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_DOUBLE, true, false, false);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected}`);
+            });
+        });
+    });
+
+    describe('Trim text', function () {
+        const multiLineContent = '    \n  A  \n  .  ';
+
+        describe('ECMA6', () => {
+            const multiLineContentExpected = '\nA\n.';
+
+            it('Base example', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA6, true, true, true);
+
+                assert.equal(results, `const someVariable = \`${multiLineContentExpected}\`;`);
+            });
+
+            it('Base example with no variable name', function () {
+                let results = stringConverter.convertText('', multiLineContent, ECMA6, true, true, true);
+
+                assert.equal(results, `\t\`${multiLineContentExpected}\`;`);
+            });
+
+            it('Base example with no semi-colon', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA6, true, true, false);
+
+                assert.equal(results, `const someVariable = \`${multiLineContentExpected}\``);
+            });
+        });
+
+        describe('ECMA5 Single Quote', () => {
+            const multiLineContentExpected = "''\n\t+ 'A'\n\t+ '.'";
+
+            it('Base example', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_SINGLE, true, true, true);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected};`);
+            });
+
+            it('Base example with no variable name', function () {
+                let results = stringConverter.convertText('', multiLineContent, ECMA5_SINGLE, true, true, true);
+
+                assert.equal(results, `\t${multiLineContentExpected};`);
+            });
+
+            it('Base example with no semi-colon', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_SINGLE, true, true, false);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected}`);
+            });
+        });
+        
+        describe('ECMA5 Double Quote', () => {
+            const multiLineContentExpected = '""\n\t+ "A"\n\t+ "."';
+
+            it('Base example', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_DOUBLE, true, true, true);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected};`);
+            });
+
+            it('Base example with no variable name', function () {
+                let results = stringConverter.convertText('', multiLineContent, ECMA5_DOUBLE, true, true, true);
+
+                assert.equal(results, `\t${multiLineContentExpected};`);
+            });
+
+            it('Base example with no semi-colon', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_DOUBLE, true, true, false);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected}`);
+            });
+        });
+    });
+
+    describe('No new lines', function () {
+        const multiLineContent = '\n\n\n\n';
+
+        describe('ECMA6', () => {
+            const multiLineContentExpected = '';
+
+            it('Base example', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA6, false, false, true);
+
+                assert.equal(results, `const someVariable = \`${multiLineContentExpected}\`;`);
+            });
+
+            it('Base example with no variable name', function () {
+                let results = stringConverter.convertText('', multiLineContent, ECMA6, false, false, true);
+
+                assert.equal(results, `\t\`${multiLineContentExpected}\`;`);
+            });
+
+            it('Base example with no semi-colon', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA6, false, false, false);
+
+                assert.equal(results, `const someVariable = \`${multiLineContentExpected}\``);
+            });
+        });
+
+        describe('ECMA5 Single Quote', () => {
+            const multiLineContentExpected = "''";
+
+            it('Base example', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_SINGLE, false, false, true);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected};`);
+            });
+
+            it('Base example with no variable name', function () {
+                let results = stringConverter.convertText('', multiLineContent, ECMA5_SINGLE, false, false, true);
+
+                assert.equal(results, `\t${multiLineContentExpected};`);
+            });
+
+            it('Base example with no semi-colon', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_SINGLE, false, false, false);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected}`);
+            });
+        });
+        
+        describe('ECMA5 Double Quote', () => {
+            const multiLineContentExpected = '""';
+
+            it('Base example', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_DOUBLE, false, false, true);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected};`);
+            });
+
+            it('Base example with no variable name', function () {
+                let results = stringConverter.convertText('', multiLineContent, ECMA5_DOUBLE, false, false, true);
+
+                assert.equal(results, `\t${multiLineContentExpected};`);
+            });
+
+            it('Base example with no semi-colon', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_DOUBLE, false, false, false);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected}`);
+            });
+        });
+    });
+
+    describe('Trim text and no newlines', function () {
+        const multiLineContent = '    \n  A  \n  .  ';
+
+        describe('ECMA6', () => {
+            const multiLineContentExpected = 'A\n.';
+
+            it('Base example', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA6, false, true, true);
+
+                assert.equal(results, `const someVariable = \`${multiLineContentExpected}\`;`);
+            });
+
+            it('Base example with no variable name', function () {
+                let results = stringConverter.convertText('', multiLineContent, ECMA6, false, true, true);
+
+                assert.equal(results, `\t\`${multiLineContentExpected}\`;`);
+            });
+
+            it('Base example with no semi-colon', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA6, false, true, false);
+
+                assert.equal(results, `const someVariable = \`${multiLineContentExpected}\``);
+            });
+        });
+
+        describe('ECMA5 Single Quote', () => {
+            const multiLineContentExpected = "'A'\n\t+ '.'";
+
+            it('Base example', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_SINGLE, false, true, true);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected};`);
+            });
+
+            it('Base example with no variable name', function () {
+                let results = stringConverter.convertText('', multiLineContent, ECMA5_SINGLE, false, true, true);
+
+                assert.equal(results, `\t${multiLineContentExpected};`);
+            });
+
+            it('Base example with no semi-colon', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_SINGLE, false, true, false);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected}`);
+            });
+        });
+        
+        describe('ECMA5 Double Quote', () => {
+            const multiLineContentExpected = '"A"\n\t+ "."';
+
+            it('Base example', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_DOUBLE, false, true, true);
+
+                assert.equal(results, `var someVariable = ${multiLineContentExpected};`);
+            });
+
+            it('Base example with no variable name', function () {
+                let results = stringConverter.convertText('', multiLineContent, ECMA5_DOUBLE, false, true, true);
+
+                assert.equal(results, `\t${multiLineContentExpected};`);
+            });
+
+            it('Base example with no semi-colon', function () {
+                let results = stringConverter.convertText('someVariable', multiLineContent, ECMA5_DOUBLE, false, true, false);
 
                 assert.equal(results, `var someVariable = ${multiLineContentExpected}`);
             });

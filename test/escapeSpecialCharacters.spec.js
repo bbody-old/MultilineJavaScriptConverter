@@ -2,7 +2,7 @@ var assert = require('chai').assert;
 var stringConverter = require('../src/converter');
 
 describe('escapeSpecialCharacters', function () {
-	describe('ECMA6 String literals', function(){
+	describe('ECMA6 String literals', () =>{
 		const ECMA6 = "ecma6";
 
 		it('should return handle empty string', function () {
@@ -22,7 +22,7 @@ describe('escapeSpecialCharacters', function () {
 	    });
 	});
 
-	describe('Single String', function(){
+	describe('Single String', () =>{
 		const ECMA5_SINGLE = "ecma5single";
 
 		it('should return handle empty string', function () {
@@ -42,7 +42,7 @@ describe('escapeSpecialCharacters', function () {
 	    });
 	});
 
-	describe('Double String', function(){
+	describe('Double String', () =>{
 		const ECMA5_DOUBLE = "ecma5double";
 
 		it('should return handle empty string', function () {

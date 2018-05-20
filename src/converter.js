@@ -123,6 +123,10 @@ let convertText = (variableName, contents, stringType, newlines, trim, semiColon
       value = value.trim();
     }
 
+    if (!newlines && ((!value || !value.length) || (value === "\n"))){
+      return;
+    }
+
     buffer += escapeSpecialCharacters(value, stringType);
 
     if (lineContents.length - 1 !== count){
@@ -146,7 +150,7 @@ let clearField = (field, defaultSelection = "") => {
   field.value = defaultSelection !== null && defaultSelection.toString ? defaultSelection.toString() : "";
 };
 
-/* istanbul ignore next */
+// Export so it can be required
 module.exports = {
   // Constants
   DEFAULT_STRING_TYPE: DEFAULT_STRING_TYPE,
