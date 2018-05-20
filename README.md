@@ -34,8 +34,14 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 ### Build all
 `npm run  build`
 
-### Test
+### Tests
 `npm run test`
+
+#### Mocha
+`npm run mocha`
+
+#### JS Hint
+`npm run jshint`
 
 ## Built with
 - [Skeleton](http://getskeleton.com/) - for basic CSS framework
