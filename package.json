@@ -26,7 +26,7 @@
   "scripts": {
     "setup": "npm install -g mocha npx && npm install copyfiles -g && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify && npm install -g jshint",
     "test": "npm run mocha && npm run jshint",
-    "mocha": "nyc --reporter=text mocha",
+    "mocha": "nyc --reporter=text -n src/converter.js mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "serve": "http-server dist",
     "build": "npm run css && npm run html && npm run js && npm run favicon",
