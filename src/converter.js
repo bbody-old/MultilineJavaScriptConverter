@@ -1,7 +1,7 @@
 // Constant variables
 const NEW_LINE = "\n";
 const TAB = "\t";
-const LINE_START = `${TAB}+ `;
+const LINE_END = " +";
 const STRING_NEW_LINE = "\\n";
 const FINAL_SEMI_COLON = ";";
 const ESCAPE_CHARACTER = "\\";
@@ -72,13 +72,13 @@ let initVariable = (variableName, stringType) => {
     if (stringType === ECMA6){
       buffer += "const ";
     } else {
-      buffer += "var ";  
+      buffer += "var ";
     }
-    
+
     buffer += variableName;
     buffer += " = ";
   }
-  
+
   return buffer;
 };
 
@@ -135,13 +135,13 @@ let convertText = (variableName, contents, stringType, newlines, trim, semiColon
       buffer += quote(stringType);
 
       if (stringType !== ECMA6){
-        buffer += `${NEW_LINE}${LINE_START}${quote(stringType)}`;
+        buffer += `${LINE_END}${NEW_LINE}${TAB}${quote(stringType)}`;
       } else {
         buffer += NEW_LINE;
       }
     }
   });
-  
+
   buffer += getEnd(stringType, semiColon);
 
   return buffer;
