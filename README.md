@@ -13,7 +13,7 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 3. Run `npm run setup` to install dependencies
 
 ### Run site
-`npm serve`
+`npm run serve`
 
 ### Compile JS
 #### Import all components
