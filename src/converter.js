@@ -153,6 +153,7 @@ let clearField = (field, defaultSelection = "") => {
 };
 
 // Export so it can be required
+/* istanbul ignore next */
 module.exports = {
   // Constants
   DEFAULT_STRING_TYPE: DEFAULT_STRING_TYPE,
