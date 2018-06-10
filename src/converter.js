@@ -5,6 +5,7 @@ const LINE_END = " +";
 const STRING_NEW_LINE = "\\n";
 const FINAL_SEMI_COLON = ";";
 const ESCAPE_CHARACTER = "\\";
+const SPACE = " ";
 
 // Special characters
 const DOUBLE_QUOTE = `"`;
@@ -83,7 +84,7 @@ let initVariable = (variableName, stringType) => {
 };
 
 // Get first line
-let getStart = (stringType, variableName) => {
+let getStart = (stringType, variableName, spaces) => {
   let buffer = "";
 
   if (variableName && variableName.length){
@@ -93,7 +94,11 @@ let getStart = (stringType, variableName) => {
       buffer += `var ${variableName} = `;
     }
   } else {
-    buffer += TAB;
+    if (spaces === true) {
+      buffer += SPACE;
+    } else {
+      buffer += TAB;
+    }
   }
 
   buffer += quote(stringType, true);
@@ -113,14 +118,13 @@ let getEnd = (stringType, semiColon = true) => {
 };
 
 // Convert text to JavaScript Variable
-let convertText = (variableName, contents, stringType, newlines, trim, semiColon) => {
+let convertText = (variableName, contents, stringType, newlines, trim, semiColon, spaces) => {
   // Output buffer
-  let buffer = getStart(stringType, variableName);
+  let buffer = getStart(stringType, variableName, spaces);
 
   const lineContents = contents.split(NEW_LINE);
 
   lineContents.forEach((value, count) => {
-
     if (trim){
       value = value.trim();
     }
@@ -135,7 +139,11 @@ let convertText = (variableName, contents, stringType, newlines, trim, semiColon
       buffer += quote(stringType);
 
       if (stringType !== ECMA6){
-        buffer += `${LINE_END}${NEW_LINE}${TAB}${quote(stringType)}`;
+        if (spaces === true) {
+          buffer += `${LINE_END}${NEW_LINE}${SPACE}${quote(stringType)}`;
+        } else {
+          buffer += `${LINE_END}${NEW_LINE}${TAB}${quote(stringType)}`;
+        }
       } else {
         buffer += NEW_LINE;
       }

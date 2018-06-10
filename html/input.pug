@@ -4,25 +4,29 @@
 		label(for="text") Text
 		textarea(id="text" class="u-full-width" rows="20")
 	.row
-		.one-half.column
+		.six.columns
 			label(for="variable-name") Variable Name (If empty, no variable will be used)
 			input(class="u-full-width" type="text" value="text" id="variable-name")
-		.one-half.column
+		.six.columns
 			label(for="string-type") String type
 			- var types = {"ecma5double": "Double quotes (ECMA5)", "ecma5single": "Single quotes (ECMA5)", "ecma6": "Template literals (ECMA6)"}
 			select(class="u-full-width" id="string-type")
 				each title, value in types
 					option(value= value, selected= value == "ecma5double")= title
 	.row
-		.one-third.column
+		.three.columns
 			label(for= "no-newline")
 				input(id="no-newline" type="checkbox")
 				span(class="label-body") No Newlines
-		.one-third.column
+		.three.columns
 			label(for= "trim-padding")
 				input(id="trim-padding" type="checkbox")
 				span(class="label-body") Trim Padding
-		.one-third.column
+		.three.columns
 			label(for= "no-semi-colon")
 				input(id="no-semi-colon" type="checkbox")
 				span(class="label-body") No Semi-colon
+		.three.columns
+			label(for= "no-tabs")
+				input(id="no-tabs" type="checkbox")
+				span(class="label-body") Spaces Replacing Tabs
