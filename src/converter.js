@@ -1,10 +1,22 @@
 // Constant variables
 const NEW_LINE = "\n";
-const TAB = "\t";
 const LINE_END = " +";
 const STRING_NEW_LINE = "\\n";
 const FINAL_SEMI_COLON = ";";
 const ESCAPE_CHARACTER = "\\";
+
+// Space types
+const TAB = "\t";
+const SPACE2 = "  ";
+const SPACE4 = "    ";
+const SPACE8 = "        ";
+
+var indenter = {
+  "tabs":  TAB,
+	"space2": SPACE2,
+	"space4": SPACE4,
+	"space8": SPACE8
+};
 
 // Special characters
 const DOUBLE_QUOTE = `"`;
@@ -24,6 +36,7 @@ const ECMA5_DOUBLE = "ecma5double";
 // Defaults
 const DEFAULT_STRING_TYPE = ECMA5_DOUBLE;
 const DEFAULT_VARIABLE_NAME = "text";
+const DEFAULT_SPACE_TYPE = TAB;
 
 // Escape any backslashes
 let escapeBackslash = value => {
@@ -113,14 +126,13 @@ let getEnd = (stringType, semiColon = true) => {
 };
 
 // Convert text to JavaScript Variable
-let convertText = (variableName, contents, stringType, newlines, trim, semiColon) => {
+let convertText = (variableName, contents, stringType, newlines, trim, semiColon, spaces) => {
   // Output buffer
   let buffer = getStart(stringType, variableName);
 
   const lineContents = contents.split(NEW_LINE);
 
   lineContents.forEach((value, count) => {
-
     if (trim){
       value = value.trim();
     }
@@ -143,6 +155,7 @@ let convertText = (variableName, contents, stringType, newlines, trim, semiColon
   });
 
   buffer += getEnd(stringType, semiColon);
+  buffer = buffer.replace(/\t/g,indenter[spaces]);
 
   return buffer;
 };
