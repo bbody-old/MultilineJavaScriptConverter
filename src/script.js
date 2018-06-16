@@ -19,8 +19,11 @@ window.convert = () => {
   // Get whether a semi-colon should be used or not
   const semiColon = !document.getElementById("no-semi-colon").checked;
 
+  // Get whether a spaces or tabs should be used
+  const spaces = document.getElementById("no-tabs").value || stringConverter.TAB;
+
   // Convert text
-  const converted = stringConverter.convertText(variableName, text, stringType, newlines, trim, semiColon);
+  const converted = stringConverter.convertText(variableName, text, stringType, newlines, trim, semiColon, spaces);
 
   // Write converted text to output box
   document.getElementById("js-code").value = converted;
@@ -32,6 +35,7 @@ window.clearAllFields = () => {
   stringConverter.clearField(document.getElementById("js-code"));
   stringConverter.clearField(document.getElementById("variable-name"), stringConverter.DEFAULT_VARIABLE_NAME);
   stringConverter.clearField(document.getElementById("string-type"), stringConverter.DEFAULT_STRING_TYPE);
+  stringConverter.clearField(document.getElementById("no-tabs"), stringConverter.DEFAULT_SPACE_TYPE);
   document.getElementById('trim-padding').checked = false;
   document.getElementById('no-newline').checked = false;
   document.getElementById('no-semi-colon').checked = false;
