@@ -1,11 +1,22 @@
 // Constant variables
 const NEW_LINE = "\n";
-const TAB = "\t";
 const LINE_END = " +";
 const STRING_NEW_LINE = "\\n";
 const FINAL_SEMI_COLON = ";";
 const ESCAPE_CHARACTER = "\\";
-const SPACE = " ";
+
+// Space types
+const TAB = "\t";
+const SPACE2 = "  ";
+const SPACE4 = "    ";
+const SPACE8 = "        ";
+
+var indenter = {
+  "tabs":  TAB,
+	"space2": SPACE2,
+	"space4": SPACE4,
+	"space8": SPACE8
+};
 
 // Special characters
 const DOUBLE_QUOTE = `"`;
@@ -25,6 +36,7 @@ const ECMA5_DOUBLE = "ecma5double";
 // Defaults
 const DEFAULT_STRING_TYPE = ECMA5_DOUBLE;
 const DEFAULT_VARIABLE_NAME = "text";
+const DEFAULT_SPACE_TYPE = TAB;
 
 // Escape any backslashes
 let escapeBackslash = value => {
@@ -84,7 +96,7 @@ let initVariable = (variableName, stringType) => {
 };
 
 // Get first line
-let getStart = (stringType, variableName, spaces) => {
+let getStart = (stringType, variableName) => {
   let buffer = "";
 
   if (variableName && variableName.length){
@@ -94,11 +106,7 @@ let getStart = (stringType, variableName, spaces) => {
       buffer += `var ${variableName} = `;
     }
   } else {
-    if (spaces === true) {
-      buffer += SPACE;
-    } else {
-      buffer += TAB;
-    }
+    buffer += TAB;
   }
 
   buffer += quote(stringType, true);
@@ -120,7 +128,7 @@ let getEnd = (stringType, semiColon = true) => {
 // Convert text to JavaScript Variable
 let convertText = (variableName, contents, stringType, newlines, trim, semiColon, spaces) => {
   // Output buffer
-  let buffer = getStart(stringType, variableName, spaces);
+  let buffer = getStart(stringType, variableName);
 
   const lineContents = contents.split(NEW_LINE);
 
@@ -139,11 +147,7 @@ let convertText = (variableName, contents, stringType, newlines, trim, semiColon
       buffer += quote(stringType);
 
       if (stringType !== ECMA6){
-        if (spaces === true) {
-          buffer += `${LINE_END}${NEW_LINE}${SPACE}${quote(stringType)}`;
-        } else {
-          buffer += `${LINE_END}${NEW_LINE}${TAB}${quote(stringType)}`;
-        }
+        buffer += `${LINE_END}${NEW_LINE}${TAB}${quote(stringType)}`;
       } else {
         buffer += NEW_LINE;
       }
@@ -151,6 +155,7 @@ let convertText = (variableName, contents, stringType, newlines, trim, semiColon
   });
 
   buffer += getEnd(stringType, semiColon);
+  buffer = buffer.replace(/\t/g,indenter[spaces]);
 
   return buffer;
 };

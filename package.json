@@ -49,8 +49,5 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bbody/MultilineJavaScriptConverter/issues"
-  },
-  "dependencies": {
-    "npm": "^6.1.0"
   }
 }
