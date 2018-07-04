@@ -11,7 +11,7 @@ const SPACE2 = "  ";
 const SPACE4 = "    ";
 const SPACE8 = "        ";
 
-var indenter = {
+const indenter = {
   "tabs":  TAB,
 	"space2": SPACE2,
 	"space4": SPACE4,
