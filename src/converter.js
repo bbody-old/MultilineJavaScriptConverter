@@ -7,6 +7,7 @@ const ESCAPE_CHARACTER = "\\";
 
 // Space types
 const TAB = "\t";
+const SPACE1 = " ";
 const SPACE2 = "  ";
 const SPACE4 = "    ";
 const SPACE8 = "        ";
@@ -137,19 +138,22 @@ let convertText = (variableName, contents, stringType, newlines, trim, semiColon
       value = value.trim();
     }
 
-    if (!newlines && ((!value || !value.length) || (value === NEW_LINE))){
+    if (trim && ((!value || !value.length) || (value === NEW_LINE))){
       return;
     }
 
     buffer += escapeSpecialCharacters(value, stringType);
 
     if (lineContents.length - 1 !== count){
+      if (newlines && stringType !== ECMA6){
+        buffer += STRING_NEW_LINE;
+      }
       buffer += quote(stringType);
-
+      
       if (stringType !== ECMA6){
         buffer += `${LINE_END}${NEW_LINE}${TAB}${quote(stringType)}`;
       } else {
-        buffer += NEW_LINE;
+        buffer += newlines ? NEW_LINE : SPACE1;
       }
     }
   });
