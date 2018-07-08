@@ -538,7 +538,7 @@ describe('convertText', () => {
         const multiLineContent = '    \n  A  \n  .  ';
 
         describe('ECMA6', () => {
-            const multiLineContentExpected = 'A\n.';
+            const multiLineContentExpected = 'A .';
 
             it('Base example', () => {
                 let results = stringConverter.convertText('someVariable', multiLineContent, ECMA6, false, true, true, "tabs");
