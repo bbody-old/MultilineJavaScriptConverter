@@ -7,6 +7,7 @@ const ESCAPE_CHARACTER = "\\";
 
 // Space types
 const TAB = "\t";
+const SPACE1 = " ";
 const SPACE2 = "  ";
 const SPACE4 = "    ";
 const SPACE8 = "        ";
@@ -36,7 +37,7 @@ const ECMA5_DOUBLE = "ecma5double";
 // Defaults
 const DEFAULT_STRING_TYPE = ECMA5_DOUBLE;
 const DEFAULT_VARIABLE_NAME = "text";
-const DEFAULT_SPACE_TYPE = TAB;
+const DEFAULT_SPACE_TYPE = "tabs";
 
 // Escape any backslashes
 let escapeBackslash = value => {
@@ -126,7 +127,7 @@ let getEnd = (stringType, semiColon = true) => {
 };
 
 // Convert text to JavaScript Variable
-let convertText = (variableName, contents, stringType, newlines, trim, semiColon, spaces) => {
+let convertText = (variableName, contents, stringType, addNewlines, trim, semiColon, spaces) => {
   // Output buffer
   let buffer = getStart(stringType, variableName);
 
@@ -137,15 +138,20 @@ let convertText = (variableName, contents, stringType, newlines, trim, semiColon
       value = value.trim();
     }
 
-    if (!newlines && ((!value || !value.length) || (value === NEW_LINE))){
-      return;
+    if (trim && ((!value || !value.length) || (value === NEW_LINE))){
+      return; // continue
     }
 
     buffer += escapeSpecialCharacters(value, stringType);
 
-    if (lineContents.length - 1 !== count){
-      buffer += quote(stringType);
+    if (addNewlines){
+      buffer += STRING_NEW_LINE;
+    }
 
+    if (lineContents.length - 1 !== count){
+
+      buffer += quote(stringType);
+      
       if (stringType !== ECMA6){
         buffer += `${LINE_END}${NEW_LINE}${TAB}${quote(stringType)}`;
       } else {
@@ -155,7 +161,7 @@ let convertText = (variableName, contents, stringType, newlines, trim, semiColon
   });
 
   buffer += getEnd(stringType, semiColon);
-  buffer = buffer.replace(/\t/g,indenter[spaces]);
+  buffer = buffer.replace(/\t/g, indenter[spaces]);
 
   return buffer;
 };
