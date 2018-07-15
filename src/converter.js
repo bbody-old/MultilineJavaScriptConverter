@@ -37,7 +37,7 @@ const ECMA5_DOUBLE = "ecma5double";
 // Defaults
 const DEFAULT_STRING_TYPE = ECMA5_DOUBLE;
 const DEFAULT_VARIABLE_NAME = "text";
-const DEFAULT_SPACE_TYPE = TAB;
+const DEFAULT_SPACE_TYPE = "tabs";
 
 // Escape any backslashes
 let escapeBackslash = value => {
