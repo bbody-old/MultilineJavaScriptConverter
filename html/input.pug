@@ -14,9 +14,9 @@
 				each title, value in types
 					option(value= value, selected= value == "ecma5double")= title
 		.four.columns
-			label(for="no-tabs") Space Type
+			label(for="space-type") Space Type
 			- var types = {"tabs": "Tabs", "space2": "2 Spaces", "space4": "4 Spaces", "space8": "8 Spaces"}
-			select(class="u-full-width" id="no-tabs")
+			select(class="u-full-width" id="space-type")
 				each title, value in types
 					option(value= value, selected= value == "tabs")= title
 	.row
