@@ -127,7 +127,7 @@ let getEnd = (stringType, semiColon = true) => {
 };
 
 // Convert text to JavaScript Variable
-let convertText = (variableName, contents, stringType, newlines, trim, semiColon, spaces) => {
+let convertText = (variableName, contents, stringType, addNewlines, trim, semiColon, spaces) => {
   // Output buffer
   let buffer = getStart(stringType, variableName);
 
@@ -139,27 +139,29 @@ let convertText = (variableName, contents, stringType, newlines, trim, semiColon
     }
 
     if (trim && ((!value || !value.length) || (value === NEW_LINE))){
-      return;
+      return; // continue
     }
 
     buffer += escapeSpecialCharacters(value, stringType);
 
+    if (addNewlines){
+      buffer += STRING_NEW_LINE;
+    }
+
     if (lineContents.length - 1 !== count){
-      if (newlines && stringType !== ECMA6){
-        buffer += STRING_NEW_LINE;
-      }
+
       buffer += quote(stringType);
       
       if (stringType !== ECMA6){
         buffer += `${LINE_END}${NEW_LINE}${TAB}${quote(stringType)}`;
       } else {
-        buffer += newlines ? NEW_LINE : SPACE1;
+        buffer += NEW_LINE;
       }
     }
   });
 
   buffer += getEnd(stringType, semiColon);
-  buffer = buffer.replace(/\t/g,indenter[spaces]);
+  buffer = buffer.replace(/\t/g, indenter[spaces]);
 
   return buffer;
 };
