@@ -52,6 +52,7 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 - [Browserify](http://browserify.org/) - for using require feature to enable better modularity of JavaScript
 - [PugJS](https://pugjs.org) - for HTML templating
 - [Mocha](https://mochajs.org/) - for unit testing
+- [Chai](http://www.chaijs.com/) - for assertions in Mocha
 
 ## Bugs and suggestions
 If you find any bugs or have any suggestions on how to improve Multiline JavaScript Converter please post in the [Github issues](https://github.com/bbody/MultilineJavaScriptConverter/issues).
