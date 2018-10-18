@@ -14,18 +14,23 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 2. Run `npm install`
 3. Run `npm run setup` to install dependencies
 
+### Build all
+`npm run build`
+
 ### Run site
 `npm run serve`
 
+---
+
 ### Compile JS
+#### Full compile
+`npm run js`
+
 #### Import all components
 `npm run js:build`
 
 #### Convert to ECMA5 code and minify
 `npm run js:compile`
-
-#### Full compile
-`npm run js`
 
 ### Compile CSS
 `npm run  css`
@@ -33,10 +38,8 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 ### Compile HTML
 `npm run  html`
 
-### Build all
-`npm run  build`
-
 ### Tests
+#### Run all tests
 `npm run test`
 
 #### Mocha
@@ -53,6 +56,7 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 - [PugJS](https://pugjs.org) - for HTML templating
 - [Mocha](https://mochajs.org/) - for unit testing
 - [Chai](http://www.chaijs.com/) - for assertions in Mocha
+- [ESLint](https://eslint.org/) - for linting of JS files
 
 ## Bugs and suggestions
 If you find any bugs or have any suggestions on how to improve Multiline JavaScript Converter please post in the [Github issues](https://github.com/bbody/MultilineJavaScriptConverter/issues).
