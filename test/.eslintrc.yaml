@@ -1,0 +1,9 @@
+# Linter file for test js files
+env:
+  mocha: true
+extends:
+  - standard
+rules:
+  semi:
+    - error
+    - always

@@ -1,0 +1,28 @@
+# Linter for main files
+env:
+  es6: true
+  node: true
+  browser: true
+extends:
+  - eslint:recommended
+  - standard
+rules:
+  semi:
+    - error
+    - always
+  array-callback-return:
+    - error
+    - allowImplicit: true
+  dot-notation:
+    - error
+    - allowKeywords: true
+  no-useless-return:
+    - error
+  function-paren-newline:
+    - error
+    - consistent
+  max-len:
+    - error
+    - code: 80
+  no-var:
+    - error    

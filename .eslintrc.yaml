@@ -1,0 +1,12 @@
+# Linter for build files
+env:
+  es6: true
+  node: true
+extends:
+  - eslint:recommended
+  - standard
+rules:
+  no-console: off
+  semi:
+    - error
+    - always
