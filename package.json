@@ -32,9 +32,9 @@
     "requirejs": "^2.3.5"
   },
   "scripts": {
-    "setup": "npm install -g mocha npx && npm install copyfiles -g && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify && npm install -g jshint",
+    "setup": "npm install -g mocha npx && npm install copyfiles -g && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify && npm install -g jshint && npm install -g eslint",
     "test": "npm run linter && npm run mocha && npm run jshint",
-    "linter": "node_modules/.bin/eslint *.js src/*.js && node_modules/.bin/eslint test/*.js",
+    "linter": "eslint *.js ; eslint src/*.js ; eslint test/*.js",
     "mocha": "nyc --reporter=text -n src/converter.js mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "serve": "http-server dist",
@@ -42,7 +42,7 @@
     "css": "node-sass scss/style.scss dist/css/style.css --output-style compressed --source-map dist/css",
     "html": "node ./html-compile.js",
     "favicon": "copyfiles -f favicons/*.* dist/",
-    "js": "npm run js:build && npm run js:compile",
+    "js": "mkdir dist ; mkdir dist/js ; npm run js:build && npm run js:compile",
     "js:prod": "npm run js:build && npm run js:compile:prod",
     "js:build": "browserify src/script.js > dist/js/script.js",
     "js:compile": "npx babel dist/js/script.js --out-file dist/js/script.js --source-maps",
