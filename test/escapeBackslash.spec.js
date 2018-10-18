@@ -1,5 +1,5 @@
-var assert = require('chai').assert;
-var stringConverter = require('../src/converter');
+const assert = require('chai').assert;
+const stringConverter = require('../src/converter');
 
 describe('escapeBackslash', () => {
   describe('Single Quote strings', () => {

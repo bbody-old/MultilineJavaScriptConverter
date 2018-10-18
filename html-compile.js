@@ -9,7 +9,7 @@ variables.package = Package;
 
 // console.log(compiledFunction(variables));
 
-var html = pug.renderFile('index.pug', variables);
+const html = pug.renderFile('index.pug', variables);
 
 fs.writeFile('dist/index.html', html, function (err) {
   if (err) {

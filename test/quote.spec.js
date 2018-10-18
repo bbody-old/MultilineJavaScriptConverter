@@ -18,9 +18,12 @@ describe('quote', () => {
     assert.equal(stringConverter.quote(ECMA6), '');
   });
 
-  it('should not return literal quote if not a wrapping element is false', () => {
-    assert.equal(stringConverter.quote(ECMA6, false), '');
-  });
+  it(
+    'should not return literal quote if not a wrapping element is false',
+    () => {
+      assert.equal(stringConverter.quote(ECMA6, false), '');
+    }
+  );
 
   it('should return literal quote if is a wrapping element', () => {
     assert.equal(stringConverter.quote(ECMA6, true), '`');
