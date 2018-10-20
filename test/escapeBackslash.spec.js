@@ -16,7 +16,10 @@ describe('escapeBackslash', () => {
       assert.equal(stringConverter.escapeBackslash('hello'), 'hello');
     });
     it('should handle unrelated characters intertwined', () => {
-      assert.equal(stringConverter.escapeBackslash('hello\\something\\'), 'hello\\\\something\\\\');
+      assert.equal(
+        stringConverter.escapeBackslash('hello\\something\\'),
+        'hello\\\\something\\\\'
+      );
     });
   });
 
@@ -34,7 +37,10 @@ describe('escapeBackslash', () => {
       assert.equal(stringConverter.escapeBackslash('hello'), 'hello');
     });
     it('should handle unrelated characters intertwined', () => {
-      assert.equal(stringConverter.escapeBackslash('hello\\something\\'), 'hello\\\\something\\\\');
+      assert.equal(
+        stringConverter.escapeBackslash('hello\\something\\'),
+        'hello\\\\something\\\\'
+      );
     });
   });
 
@@ -52,7 +58,10 @@ describe('escapeBackslash', () => {
       assert.equal(stringConverter.escapeBackslash(`hello`), `hello`);
     });
     it('should handle unrelated characters intertwined', () => {
-      assert.equal(stringConverter.escapeBackslash(`hello\\something\\`), `hello\\\\something\\\\`);
+      assert.equal(
+        stringConverter.escapeBackslash(`hello\\something\\`),
+        `hello\\\\something\\\\`
+      );
     });
   });
 });

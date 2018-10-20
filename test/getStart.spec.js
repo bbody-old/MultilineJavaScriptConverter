@@ -11,7 +11,9 @@ describe('getStart', () => {
     assert.equal(stringConverter.getStart(ECMA6), '\t`');
     assert.equal(stringConverter.getStart(ECMA6, null), '\t`');
     assert.equal(stringConverter.getStart(ECMA6, undefined), '\t`');
-    assert.equal(stringConverter.getStart(ECMA6, 'someVariable'), 'const someVariable = `');
+    assert.equal(
+      stringConverter.getStart(ECMA6, 'someVariable'), 'const someVariable = `'
+    );
   });
 
   it('should return handle single quote string', () => {
@@ -19,7 +21,10 @@ describe('getStart', () => {
     assert.equal(stringConverter.getStart(ECMA5_SINGLE), "\t'");
     assert.equal(stringConverter.getStart(ECMA5_SINGLE, null), "\t'");
     assert.equal(stringConverter.getStart(ECMA5_SINGLE, undefined), "\t'");
-    assert.equal(stringConverter.getStart(ECMA5_SINGLE, 'someVariable'), "var someVariable = '");
+    assert.equal(
+      stringConverter.getStart(ECMA5_SINGLE, 'someVariable'),
+      "var someVariable = '"
+    );
   });
 
   it('should return handle double quote string', () => {
@@ -27,6 +32,9 @@ describe('getStart', () => {
     assert.equal(stringConverter.getStart(ECMA5_DOUBLE), '\t"');
     assert.equal(stringConverter.getStart(ECMA5_DOUBLE, null), '\t"');
     assert.equal(stringConverter.getStart(ECMA5_DOUBLE, undefined), '\t"');
-    assert.equal(stringConverter.getStart(ECMA5_DOUBLE, 'someVariable'), 'var someVariable = "');
+    assert.equal(
+      stringConverter.getStart(ECMA5_DOUBLE, 'someVariable'),
+      'var someVariable = "'
+    );
   });
 });
