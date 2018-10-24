@@ -1,13 +1,13 @@
 const pug = require('pug');
 const fs = require('fs');
 const variables = require('./index.json');
-const Package = require('./package.json');
+const pkg = require('./package.json');
 
-variables.package = Package;
+variables.package = pkg;
 
-// const compiledFunction = pug.compileFile('index.pug');
+const compiledFunction = pug.compileFile('index.pug');
 
-// console.log(compiledFunction(variables));
+console.log(compiledFunction(variables));
 
 const html = pug.renderFile('index.pug', variables);
 

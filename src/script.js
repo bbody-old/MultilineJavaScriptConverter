@@ -9,7 +9,7 @@ window.convert = () => {
 
   // Get the type of string wanted to be output
   const stringType = document.getElementById('string-type').value ||
-  stringConverter.ECMA5_DOUBLE;
+    stringConverter.ECMA5_DOUBLE;
 
   // Get whether newlines are added
   const addNewlines = document.getElementById('add-newline').checked;
