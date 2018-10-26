@@ -133,7 +133,7 @@ let convertText = (variableName, contents, stringType, addNewlines, trim,
   let buffer = getStart(stringType, variableName);
   
   let arrayCount = 0;
-  let arrayBuffer = [""];
+  let arrayBuffer = [''];
 
   const lineContents = contents.split(NEW_LINE);
 
