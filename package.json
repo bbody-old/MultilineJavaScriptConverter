@@ -6,10 +6,10 @@
     {
       "name": "Brendon Body"
     },
-    {
+	{
       "name": "Ognjen Belic"
     },
-    {
+	{
       "name": "Angelo Rizzuto"
     }
   ],
@@ -21,15 +21,8 @@
     "babel-preset-minify": "^0.4.3",
     "chai": "^4.1.2",
     "coveralls": "^3.0.2",
-    "eslint": "^5.7.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
     "gh-pages": "^1.2.0",
-    "husky": "^1.1.2",
-    "jshint": "^2.9.6",
+    "jshint": "^2.9.5",
     "mocha": "^5.2.0",
     "node-sass": "^4.9.2",
     "nyc": "^12.0.2",
@@ -37,22 +30,22 @@
     "requirejs": "^2.3.5"
   },
   "scripts": {
+    "setup": "npm install -g mocha npx && npm install copyfiles -g && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify && npm install -g jshint",
+    "test": "npm run mocha && npm run jshint",
+    "mocha": "nyc --reporter=text -n src/converter.js mocha",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "serve": "http-server dist",
     "build": "npm run css && npm run html && npm run js && npm run favicon",
     "css": "node-sass scss/style.scss dist/css/style.css --output-style compressed --source-map dist/css",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "favicon": "copyfiles -f favicons/*.* dist/",
     "html": "node ./html-compile.js",
-    "js": "mkdir dist ; mkdir dist/js ; npm run js:build && npm run js:compile",
+    "favicon": "copyfiles -f favicons/*.* dist/",
+    "js": "npm run js:build && npm run js:compile",
+    "js:prod": "npm run js:build && npm run js:compile:prod",
     "js:build": "browserify src/script.js > dist/js/script.js",
     "js:compile": "npx babel dist/js/script.js --out-file dist/js/script.js --source-maps",
     "js:compile:prod": "npx babel dist/js/script.js",
-    "js:prod": "npm run js:build && npm run js:compile:prod",
     "jshint": "jshint src/script.js && jshint src/converter.js",
-    "linter": "eslint *.js ; eslint src/*.js ; eslint test/*.js",
-    "mocha": "nyc --reporter=text -n src/converter.js mocha",
-    "setup": "npm install -g mocha npx && npm install copyfiles -g && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify && npm install -g jshint && npm install -g eslint",
-    "serve": "http-server dist",
-    "test": "npm run linter && npm run mocha && npm run jshint"
+    "deploy": "echo 'jsstringconverter.bbody.io' > ./dist/CNAME && delete dist/js/script.js.map && npm run js:prod && gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -62,10 +55,5 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bbody/MultilineJavaScriptConverter/issues"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm test"
-    }
   }
 }
