@@ -23,7 +23,7 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 ---
 
 ### Compile JS
-#### Full compile
+#### Full JS compile
 `npm run js`
 
 #### Import all components
@@ -41,6 +41,9 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 ### Tests
 #### Run all tests
 `npm run test`
+
+#### Run ESLLint
+`npm run linter`
 
 #### Mocha
 `npm run mocha`
