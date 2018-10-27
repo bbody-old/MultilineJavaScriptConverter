@@ -29,7 +29,6 @@
     "eslint-plugin-standard": "^4.0.0",
     "gh-pages": "^1.2.0",
     "husky": "^1.1.2",
-    "jshint": "^2.9.6",
     "mocha": "^5.2.0",
     "node-sass": "^4.9.2",
     "nyc": "^12.0.2",
@@ -47,12 +46,11 @@
     "js:compile": "npx babel dist/js/script.js --out-file dist/js/script.js --source-maps",
     "js:compile:prod": "npx babel dist/js/script.js",
     "js:prod": "npm run js:build && npm run js:compile:prod",
-    "jshint": "jshint src/script.js && jshint src/converter.js",
     "linter": "eslint *.js && eslint src/*.js && eslint test/*.js",
     "mocha": "nyc --reporter=text -n src/converter.js mocha",
-    "setup": "npm install -g mocha npx && npm install copyfiles -g && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify && npm install -g jshint && npm install -g eslint",
+    "setup": "npm install -g mocha npx && npm install copyfiles -g && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify && npm install -g eslint",
     "serve": "http-server dist",
-    "test": "npm run linter && npm run mocha && npm run jshint"
+    "test": "npm run linter && npm run mocha"
   },
   "repository": {
     "type": "git",
@@ -65,7 +63,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm test"
+      "pre-push": "npm test",
+      "pre-commit": "npm run linter"
     }
   }
 }
