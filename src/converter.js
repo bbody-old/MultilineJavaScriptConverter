@@ -131,7 +131,7 @@ let convertText = (variableName, contents, stringType, addNewlines, trim,
   semiColon, spaces) => {
   // Output buffer
   let buffer = getStart(stringType, variableName);
-  
+
   let arrayCount = 0;
   let arrayBuffer = [''];
 
@@ -146,33 +146,34 @@ let convertText = (variableName, contents, stringType, addNewlines, trim,
       return; // continue
     }
 
-	arrayBuffer[arrayCount] += escapeSpecialCharacters(value, stringType);
+    arrayBuffer[arrayCount] += escapeSpecialCharacters(value, stringType);
 
     if (addNewlines) {
-	  arrayBuffer[arrayCount] += STRING_NEW_LINE;
+      arrayBuffer[arrayCount] += STRING_NEW_LINE;
     }
 
     if (lineContents.length - 1 !== count) {
-	  arrayCount++;
-	  arrayBuffer[arrayCount] = quote(stringType);
-	  
+      arrayCount++;
+      arrayBuffer[arrayCount] = quote(stringType);
+
       if (stringType !== ECMA6) {
-		arrayBuffer[arrayCount] += `${LINE_END}${NEW_LINE}${TAB}${quote(stringType)}`;
+        arrayBuffer[arrayCount] +=
+            `${LINE_END}${NEW_LINE}${TAB}${quote(stringType)}`;
       } else {
-		arrayBuffer[arrayCount] += NEW_LINE;
+        arrayBuffer[arrayCount] += NEW_LINE;
       }
     }
   });
-  
+
   let lastLine = (lineContents[lineContents.length - 1]).trim();
-  if (trim && (!lastLine || !lastLine.length) || (lastLine === NEW_LINE)){
-	  arrayBuffer.pop();
+  if (trim && ((!lastLine || !lastLine.length) || (lastLine === NEW_LINE))) {
+    arrayBuffer.pop();
   }
-  
-  buffer += arrayBuffer.join("");
+
+  buffer += arrayBuffer.join('');
   buffer += getEnd(stringType, semiColon);
   buffer = buffer.replace(/\t/g, indenter[spaces]);
-  
+
   return buffer;
 };
 
