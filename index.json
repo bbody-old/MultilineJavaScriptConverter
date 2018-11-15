@@ -4,11 +4,11 @@
 			"js/script.js"
 		],
 		"scripts_async": [
-			"//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js",
+			"//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js",
 			"https://www.googletagmanager.com/gtag/js?id=UA-117132942-1"
 		],
 		"stylesheets": [
-			"//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css",
+			"//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css",
 			"//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
 			"css/style.css"
 		],
