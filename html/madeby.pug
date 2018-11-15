@@ -1,0 +1,8 @@
+.u-full-width
+	.row
+		h2 Made by...	
+	.row
+		each contributor, index in package.contributors
+			.three.columns
+				h3 #[a(href= contributor.url)= contributor.name]
+				p= contributor.description
