@@ -20,11 +20,6 @@
 	},
 	"builtwith": [
 		{
-			"name": "Skeleton",
-			"link": "http://getskeleton.com/",
-			"purpose": "lightweight website styling"
-		},
-		{
 			"name": "Babel",
 			"link": "https://babeljs.io/",
 			"purpose": "converting JS to ECMA5"
@@ -38,11 +33,6 @@
 			"name": "Browserify",
 			"link": "http://browserify.org/",
 			"purpose": "building JavaScript"
-		},
-		{
-			"name": "PugJS",
-			"link": "https://pugjs.org",
-			"purpose": "templating HTML"
 		},
 		{
 			"name": "Mocha",
