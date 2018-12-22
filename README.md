@@ -7,7 +7,7 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 
 [Multiline JavaScript Converter tool](http://jsstringconverter.bbody.io/)
 
-![Demo of Multiline JavaScript Converter](https://s3-ap-southeast-2.amazonaws.com/bbody-images/github/MultilineJavaScriptConverter/demo.gif "Demo of Multiline JavaScript Converter")
+![Demo of Multiline JavaScript Converter](https://raw.githubusercontent.com/bbody/MultilineJavaScriptConverter/master/screenshots/demo.gif "Demo of Multiline JavaScript Converter")
 
 ## Getting setup
 1. Download repository
