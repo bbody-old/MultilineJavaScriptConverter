@@ -5,10 +5,6 @@ const pkg = require('./package.json');
 
 variables.package = pkg;
 
-const compiledFunction = pug.compileFile('index.pug');
-
-console.log(compiledFunction(variables));
-
 const html = pug.renderFile('index.pug', variables);
 
 fs.writeFile('dist/index.html', html, function (err) {

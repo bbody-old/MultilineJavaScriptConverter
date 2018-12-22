@@ -4,13 +4,20 @@
   "description": "Turns multiline text into safe JavaScript variables",
   "contributors": [
     {
-      "name": "Brendon Body"
+      "name": "Brendon Body",
+      "url": "https://github.com/bbody"
     },
     {
-      "name": "Ognjen Belic"
+      "name": "Ognjen Belic",
+      "url": "https://github.com/obelic2"
     },
     {
-      "name": "Angelo Rizzuto"
+      "name": "Angelo Rizzuto",
+      "url": "https://github.com/Angelo-R"
+    },
+    {
+      "name": "Lachlan Collins",
+      "url": "https://github.com/Lockyc"
     }
   ],
   "devDependencies": {
