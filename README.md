@@ -51,7 +51,7 @@ Inside your Node project:
 | Field # | Field Name | Valid Values |
 |:-------:| ---------- | ------------ |
 | 1 | Variable name | Any string |
-| 2 | Input variables | String separated by *\n* or Array |
+| 2 | Input variables | String separated by '\n' (Newline) or Array |
 | 3 | String type | *ECMA_DOUBLE*/*ECMA_SINGLE*/*ECMA6*/*JSON_DOUBLE* |
 | 4 | Add new lines | *true*/*false* |
 | 5 | Trim whitespace | *true*/*false* |
