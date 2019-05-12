@@ -150,6 +150,14 @@ describe('convertText', () => {
         assert.equal(results, 'const someVariable = `some content`;');
       });
 
+      it('Base example called with array', () => {
+        let results = stringConverter.convertText(
+          'someVariable', ['some content'], stringConverter.ECMA6, false, false, true, 'tabs'
+        );
+
+        assert.equal(results, 'const someVariable = `some content`;');
+      });
+
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
           '', 'some content', stringConverter.ECMA6, false, false, true, 'tabs'
@@ -302,11 +310,20 @@ describe('convertText', () => {
 
   describe('Multiple line content', () => {
     const multiLineContent = 'Something\nmulti\nline';
+    const multiLineContentArray = ['Something', 'multi', 'line'];
 
     describe('ECMA6', () => {
       it('Base example', () => {
         let results = stringConverter.convertText(
           'someVariable', multiLineContent, stringConverter.ECMA6, false, false, true, 'tabs'
+        );
+
+        assert.equal(results, `const someVariable = \`${multiLineContent}\`;`);
+      });
+
+      it('Base example with array', () => {
+        let results = stringConverter.convertText(
+          'someVariable', multiLineContentArray, stringConverter.ECMA6, false, false, true, 'tabs'
         );
 
         assert.equal(results, `const someVariable = \`${multiLineContent}\`;`);
@@ -342,6 +359,22 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
+          stringConverter.ECMA5_DOUBLE,
+          false,
+          false,
+          true,
+          'tabs'
+        );
+
+        assert.equal(
+          results, 'var someVariable = "Something" +\n\t"multi" +\n\t"line";'
+        );
+      });
+
+      it('Base example called with Array', () => {
+        let results = stringConverter.convertText(
+          'someVariable',
+          multiLineContentArray,
           stringConverter.ECMA5_DOUBLE,
           false,
           false,
@@ -447,6 +480,23 @@ describe('convertText', () => {
         );
       });
 
+      it('Base example called with Array', () => {
+        let results = stringConverter.convertText(
+          'someVariable',
+          multiLineContentArray,
+          stringConverter.ECMA5_SINGLE,
+          false,
+          false,
+          true,
+          'tabs'
+        );
+
+        assert.equal(
+          results,
+          'var someVariable = \'Something\' +\n\t\'multi\' +\n\t\'line\';'
+        );
+      });
+
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
           '', multiLineContent, stringConverter.ECMA5_SINGLE, false, false, true, 'tabs'
@@ -478,6 +528,22 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
+          stringConverter.ECMA5_DOUBLE,
+          false,
+          false,
+          true,
+          'tabs'
+        );
+
+        assert.equal(
+          results, 'var someVariable = "Something" +\n\t"multi" +\n\t"line";'
+        );
+      });
+
+      it('Base example called with Array', () => {
+        let results = stringConverter.convertText(
+          'someVariable',
+          multiLineContentArray,
           stringConverter.ECMA5_DOUBLE,
           false,
           false,

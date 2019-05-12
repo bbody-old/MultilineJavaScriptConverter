@@ -12,6 +12,11 @@ const SPACE2 = '  ';
 const SPACE4 = '    ';
 const SPACE8 = '        ';
 
+const TABS = 'tabs';
+const SPACES_2 = 'space2';
+const SPACES_4 = 'space4';
+const SPACES_8 = 'space8';
+
 const indenter = {
   'tabs': TAB,
   'space2': SPACE2,
@@ -151,7 +156,8 @@ const convertText = (variableName, contents, stringType, addNewlines, trim,
   let arrayCount = 0;
   let arrayBuffer = [''];
 
-  const lineContents = contents.split(NEW_LINE);
+  const lineContents =
+    (typeof contents === 'string') ? contents.split(NEW_LINE) : contents;
 
   lineContents.forEach((value, count) => {
     if (trim) {
@@ -206,6 +212,10 @@ module.exports = {
   ECMA5_DOUBLE,
   ECMA6,
   JSON_DOUBLE,
+  TABS,
+  SPACES_2,
+  SPACES_4,
+  SPACES_8,
 
   // Functions
   escapeBackslash,
