@@ -1,0 +1,16 @@
+dist
+favicons
+html
+node_modules
+screenshots
+scss
+src/.eslintrc.yaml
+src/script.js
+test
+.babelrc
+.eslintrc.yaml
+.gitignore
+.travis.yaml
+html-compile.js
+index.json
+index.pug
