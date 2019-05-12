@@ -1,6 +1,6 @@
 {
   "name": "multilinejavascriptconverter",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Turns multiline text into safe JavaScript variables",
   "contributors": [
     {
@@ -59,6 +59,7 @@
     "serve": "http-server dist",
     "test": "npm run linter && npm run mocha"
   },
+  "main": "./src/converter.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bbody/MultilineJavaScriptConverter.git"

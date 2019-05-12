@@ -25,4 +25,11 @@ deploy:
     repo: bbody/MultilineJavaScriptConverter
     on:
       branch: master
+  - provider: npm
+    skip_cleanup: true
+    email: "bbody.project@gmail.com"
+    api_key: $NPMJS_TOKEN
+    on:
+      branch: master
+      tags: true
 after_success: npm run coverage
