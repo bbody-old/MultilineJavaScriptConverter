@@ -2,12 +2,12 @@ const stringConverter = require('./converter');
 
 window.onChangeStringType = (event) => {
   const selectedElement = event.value;
-  const noSemiColon = document.getElementById('no-semi-colon');
+  const noSemiColon = document.getElementById('no-semi-colon-field');
 
   if (selectedElement === 'json') {
-    noSemiColon.disabled = true;
+    noSemiColon.style = 'display: none';
   } else {
-    noSemiColon.disabled = false;
+    noSemiColon.style = 'display: block';
   }
 };
 
