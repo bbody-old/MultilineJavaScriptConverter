@@ -81,6 +81,20 @@ Inside your Node project:
 #### Mocha
 `npm run mocha`
 
+#### Run E2E tests
+
+Run the below the first time:
+
+`npm run selenium-setup`
+
+Followed by
+
+`npm run serve`
+
+Then
+
+`npm run nightwatch`
+
 ## Built with
 - [Skeleton](http://getskeleton.com/) - for basic CSS framework
 - [Babel](https://babeljs.io/) - for converting to ECMA5 code for browser
@@ -89,6 +103,7 @@ Inside your Node project:
 - [PugJS](https://pugjs.org) - for HTML templating
 - [Mocha](https://mochajs.org/) - for unit testing
 - [Chai](http://www.chaijs.com/) - for assertions in Mocha
+- [Nightwatch](https://nightwatchjs.org) - for E2E testing
 - [ESLint](https://eslint.org/) - for linting of JS files
 
 ## Bugs and suggestions

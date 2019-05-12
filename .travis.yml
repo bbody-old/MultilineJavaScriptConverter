@@ -5,11 +5,14 @@ dist: trusty
 before_script:
 - npm install
 - npm run setup
+- npm run selenium-setup
 - mkdir dist
 - mkdir dist/js
 script:
 - npm run build
 - npm run test
+- npm run serve &
+- npm run nightwatch
 cache:
   directories:
   - node_modules
