@@ -63,3 +63,6 @@ node_modules/
 dist/
 .nyc_output/
 coverage/
+
+chromedriver.log
+tests_output/

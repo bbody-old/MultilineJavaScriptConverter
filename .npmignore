@@ -6,7 +6,7 @@ screenshots
 scss
 src/.eslintrc.yaml
 src/script.js
-test
+tests
 .babelrc
 .eslintrc.yaml
 .gitignore
@@ -14,3 +14,4 @@ test
 html-compile.js
 index.json
 index.pug
+nightwatch.json

@@ -44,6 +44,24 @@ Inside your Node project:
     */
 ```
 
+### Documentation
+
+**Note:** All fields are required.
+
+| Field # | Field Name | Valid Values |
+|:-------:| ---------- | ------------ |
+| 1 | Variable name | Any string |
+| 2 | Input variables | String separated by *\n* or Array |
+| 3 | String type | *ECMA_DOUBLE*/*ECMA_SINGLE*/*ECMA6*/*JSON_DOUBLE* |
+| 4 | Add new lines | *true*/*false* |
+| 5 | Trim whitespace | *true*/*false* |
+| 6 | Semicolon (N/A for JSON_DOUBLE) | *true*/*false* |
+| 7 | Spaces | *TAB*/*SPACES_2*/*SPACES_4*/*SPACES_8* |
+
+Below constants can be imported from the library:
+- **String types:** *ECMA_DOUBLE*/*ECMA_SINGLE*/*ECMA6*/*JSON_DOUBLE*
+- **Space types:** *TAB*/*SPACES_2*/*SPACES_4*/*SPACES_8*
+
 ## Getting setup
 1. Download repository
 2. Run `npm install`
@@ -81,6 +99,21 @@ Inside your Node project:
 #### Mocha
 `npm run mocha`
 
+#### Run E2E tests
+
+Run the below the first time:
+
+`npm run selenium-setup`
+
+The below must be running every time tests are run:
+
+`npm run serve`
+`node_modules/.bin/chromedriver`
+
+To run the tests run the below:
+
+`npm run nightwatch`
+
 ## Built with
 - [Skeleton](http://getskeleton.com/) - for basic CSS framework
 - [Babel](https://babeljs.io/) - for converting to ECMA5 code for browser
@@ -89,6 +122,7 @@ Inside your Node project:
 - [PugJS](https://pugjs.org) - for HTML templating
 - [Mocha](https://mochajs.org/) - for unit testing
 - [Chai](http://www.chaijs.com/) - for assertions in Mocha
+- [Nightwatch](https://nightwatchjs.org) - for E2E testing
 - [ESLint](https://eslint.org/) - for linting of JS files
 
 ## Bugs and suggestions

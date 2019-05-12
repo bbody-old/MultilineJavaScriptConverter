@@ -1,5 +1,5 @@
 let assert = require('chai').assert;
-let stringConverter = require('../src/converter');
+let stringConverter = require('../../src/converter');
 
 describe('getEnd', () => {
   it('should return handle ECMA6 string literal', () => {

@@ -1,0 +1,20 @@
+{
+  "src_folders" : ["tests/e2e"],
+
+  "webdriver" : {
+    "start_process": false,
+    "server_path": "node_modules/.bin/chromedriver",
+    "port": 9515
+  },
+
+  "test_settings" : {
+    "default" : {
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "chromeOptions" : {
+          "args" : ["--headless", "--remote-debugging-port=9222", "--disable-gpu=true"]
+        }
+      }
+    }
+  }
+}
