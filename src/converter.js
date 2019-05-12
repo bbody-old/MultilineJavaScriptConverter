@@ -33,6 +33,7 @@ const ESCAPED_BACKTICK = `\\\``;
 const ECMA6 = 'ecma6';
 const ECMA5_SINGLE = 'ecma5single';
 const ECMA5_DOUBLE = 'ecma5double';
+const JSON_DOUBLE = 'json';
 
 // Defaults
 const DEFAULT_STRING_TYPE = ECMA5_DOUBLE;
@@ -40,15 +41,15 @@ const DEFAULT_VARIABLE_NAME = 'text';
 const DEFAULT_SPACE_TYPE = 'tabs';
 
 // Escape any backslashes
-let escapeBackslash = value => {
+const escapeBackslash = value => {
   return value.replace(/\\/g, '\\\\');
 };
 
 // Escape any special characters that will effect Javascript
-let escapeSpecialCharacters = (line, stringType) => {
+const escapeSpecialCharacters = (line, stringType) => {
   let value = escapeBackslash(line);
 
-  if (stringType === ECMA5_DOUBLE) {
+  if ((stringType === ECMA5_DOUBLE) || (stringType === JSON_DOUBLE)) {
     // Escape double quotes
     value = value.replace(/"/g, ESCAPED_DOUBLE_QUOTE);
   } else if (stringType === ECMA5_SINGLE) {
@@ -63,61 +64,76 @@ let escapeSpecialCharacters = (line, stringType) => {
 };
 
 // Return the type of quote based on string type and if it is the end/start
-let quote = (stringType, wrapper = false) => {
+const getQuote = (stringType) => {
   if (stringType === ECMA5_DOUBLE) {
     return DOUBLE_QUOTE;
-  } else if (stringType === ECMA5_SINGLE) {
-    return SINGLE_QUOTE;
-  } else if (stringType === ECMA6 && wrapper) {
-    return BACKTICK;
   } else if (stringType === ECMA6) {
-    return '';
+    return BACKTICK;
+  } else if (stringType === JSON_DOUBLE) {
+    return DOUBLE_QUOTE;
   } else {
     return SINGLE_QUOTE;
   }
 };
 
-// Initialize the variable line
-let initVariable = (variableName, stringType) => {
-  let buffer = '';
-
-  if (variableName && variableName.length) {
-    // Variable name
-    if (stringType === ECMA6) {
-      buffer += 'const ';
-    } else {
-      buffer += 'var ';
-    }
-
-    buffer += variableName;
-    buffer += ' = ';
+// Get line of string type
+const getLine = (stringType, value) => {
+  if (stringType === JSON_DOUBLE) {
+    return `${TAB}${TAB}${DOUBLE_QUOTE}${value}${DOUBLE_QUOTE}`;
+  } else if (stringType === ECMA6) {
+    return value;
+  } else {
+    const quote = getQuote(stringType);
+    return `${quote}${value}${quote}`;
   }
+};
 
-  return buffer;
+// Joiner for joining the array
+const getJoiner = (stringType) => {
+  if (stringType === JSON_DOUBLE) {
+    return `,${NEW_LINE}`;
+  } else if (stringType === ECMA6) {
+    return `${NEW_LINE}`;
+  } else {
+    return `${LINE_END}${NEW_LINE}${TAB}`;
+  }
 };
 
 // Get first line
-let getStart = (stringType, variableName) => {
+const getStart = (stringType, variableName) => {
   let buffer = '';
-
-  if (variableName && variableName.length) {
-    if (stringType === ECMA6) {
-      buffer += `const ${variableName} = `;
-    } else {
-      buffer += `var ${variableName} = `;
-    }
+  if (stringType === JSON_DOUBLE) {
+    variableName = variableName && variableName.length
+      ? variableName : 'output';
+    buffer += `{${NEW_LINE}${TAB}${DOUBLE_QUOTE}`;
+    buffer += variableName;
+    buffer += `${DOUBLE_QUOTE}: [`;
   } else {
-    buffer += TAB;
+    if (variableName && variableName.length) {
+      if (stringType === ECMA6) {
+        buffer += `const ${variableName} = \``;
+      } else {
+        buffer += `var ${variableName} = `;
+      }
+    } else {
+      buffer += TAB;
+      if (stringType === ECMA6) {
+        buffer += BACKTICK;
+      }
+    }
   }
-
-  buffer += quote(stringType, true);
-
   return buffer;
 };
 
 // Get end of line
-let getEnd = (stringType, semiColon = true) => {
-  let buffer = quote(stringType, true);
+const getEnd = (stringType, semiColon = true) => {
+  let buffer = '';
+
+  if (stringType === JSON_DOUBLE) {
+    return `${TAB}]${NEW_LINE}}`;
+  } else if (stringType === ECMA6) {
+    buffer += `\``;
+  }
 
   if (semiColon) {
     buffer += FINAL_SEMI_COLON;
@@ -127,7 +143,7 @@ let getEnd = (stringType, semiColon = true) => {
 };
 
 // Convert text to JavaScript Variable
-let convertText = (variableName, contents, stringType, addNewlines, trim,
+const convertText = (variableName, contents, stringType, addNewlines, trim,
   semiColon, spaces) => {
   // Output buffer
   let buffer = getStart(stringType, variableName);
@@ -146,31 +162,27 @@ let convertText = (variableName, contents, stringType, addNewlines, trim,
       return; // continue
     }
 
-    arrayBuffer[arrayCount] += escapeSpecialCharacters(value, stringType);
+    value = escapeSpecialCharacters(value, stringType);
 
     if (addNewlines) {
-      arrayBuffer[arrayCount] += STRING_NEW_LINE;
+      value += STRING_NEW_LINE;
     }
 
-    if (lineContents.length - 1 !== count) {
-      arrayCount++;
-      arrayBuffer[arrayCount] = quote(stringType);
+    arrayBuffer[arrayCount] = getLine(stringType, value);
 
-      if (stringType !== ECMA6) {
-        arrayBuffer[arrayCount] +=
-            `${LINE_END}${NEW_LINE}${TAB}${quote(stringType)}`;
-      } else {
-        arrayBuffer[arrayCount] += NEW_LINE;
-      }
-    }
+    arrayCount++;
   });
 
-  let lastLine = (lineContents[lineContents.length - 1]).trim();
-  if (trim && ((!lastLine || !lastLine.length) || (lastLine === NEW_LINE))) {
-    arrayBuffer.pop();
+  if ((arrayBuffer.length > 0) && (stringType === JSON_DOUBLE)) {
+    buffer += NEW_LINE;
   }
 
-  buffer += arrayBuffer.join('');
+  buffer += arrayBuffer.join(getJoiner(stringType));
+
+  if ((arrayBuffer.length > 0) && (stringType === JSON_DOUBLE)) {
+    buffer += NEW_LINE;
+  }
+
   buffer += getEnd(stringType, semiColon);
   buffer = buffer.replace(/\t/g, indenter[spaces]);
 
@@ -178,7 +190,7 @@ let convertText = (variableName, contents, stringType, addNewlines, trim,
 };
 
 // Clear the field with empty string unless a default selection is provided
-let clearField = (field, defaultSelection = '') => {
+const clearField = (field, defaultSelection = '') => {
   field.value = defaultSelection !== null &&
   defaultSelection.toString ? defaultSelection.toString() : '';
 };
@@ -187,18 +199,22 @@ let clearField = (field, defaultSelection = '') => {
 /* istanbul ignore next */
 module.exports = {
   // Constants
-  DEFAULT_STRING_TYPE: DEFAULT_STRING_TYPE,
-  DEFAULT_VARIABLE_NAME: DEFAULT_VARIABLE_NAME,
-  DEFAULT_SPACE_TYPE: DEFAULT_SPACE_TYPE,
-  ECMA5_DOUBLE: ECMA5_DOUBLE,
+  DEFAULT_STRING_TYPE,
+  DEFAULT_VARIABLE_NAME,
+  DEFAULT_SPACE_TYPE,
+  ECMA5_SINGLE,
+  ECMA5_DOUBLE,
+  ECMA6,
+  JSON_DOUBLE,
 
   // Functions
-  escapeBackslash: escapeBackslash,
-  escapeSpecialCharacters: escapeSpecialCharacters,
-  quote: quote,
-  initVariable: initVariable,
-  getStart: getStart,
-  getEnd: getEnd,
-  convertText: convertText,
-  clearField: clearField
+  escapeBackslash,
+  escapeSpecialCharacters,
+  getQuote,
+  getStart,
+  getEnd,
+  convertText,
+  clearField,
+  getLine,
+  getJoiner
 };

@@ -9,8 +9,8 @@
 			input(class="u-full-width" type="text" value="text" id="variable-name")
 		.four.columns
 			label(for="string-type") String Type
-			- var types = {"ecma5double": "Double quotes (ECMA5)", "ecma5single": "Single quotes (ECMA5)", "ecma6": "Template literals (ECMA6)"}
-			select(class="u-full-width" id="string-type")
+			- var types = {"ecma5double": "Double quotes (ECMA5)", "ecma5single": "Single quotes (ECMA5)", "ecma6": "Template literals (ECMA6)", "json": "JSON String"}
+			select(class="u-full-width" id="string-type" onchange="onChangeStringType(this)")
 				each title, value in types
 					option(value= value, selected= value == "ecma5double")= title
 		.four.columns
@@ -28,7 +28,7 @@
 			label(for= "trim-padding")
 				input(id="trim-padding" type="checkbox")
 				span(class="label-body") Trim Padding
-		.four.columns
+		.four.columns(id="no-semi-colon-field")
 			label(for= "no-semi-colon")
 				input(id="no-semi-colon" type="checkbox")
 				span(class="label-body") No Semi-colon

@@ -1,5 +1,16 @@
 const stringConverter = require('./converter');
 
+window.onChangeStringType = (event) => {
+  const selectedElement = event.value;
+  const noSemiColon = document.getElementById('no-semi-colon-field');
+
+  if (selectedElement === 'json') {
+    noSemiColon.style = 'display: none';
+  } else {
+    noSemiColon.style = 'display: block';
+  }
+};
+
 window.convert = () => {
   // Get input content
   const text = document.getElementById('text').value;
