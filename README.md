@@ -9,8 +9,32 @@ Multiline JavaScript Converter is a tool to convert strings into JavaScript safe
 
 ![Demo of Multiline JavaScript Converter](https://raw.githubusercontent.com/bbody/MultilineJavaScriptConverter/master/screenshots/demo.gif "Demo of Multiline JavaScript Converter")
 
-## NPM Library
+## Standalone Library
 
+### NPM
+`npm install --save-dev MultilineJavaScriptConverter`
+
+### Yarn
+`yarn install --save MultilineJavaScriptConverter`
+
+### Include
+
+Inside your Node project:
+
+```js
+    var msc = require('MultilineJavaScriptConverter');
+    var input = `
+    a
+    b
+    c
+    d
+    e
+    f
+    `;
+
+    console.log(msc.convertText('output', input, msc.ECMA5_DOUBLE, false, true, false, 'tabs');
+
+```
 
 ## Getting setup
 1. Download repository
