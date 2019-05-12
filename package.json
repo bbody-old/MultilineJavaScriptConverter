@@ -1,6 +1,6 @@
 {
   "name": "multilinejavascriptconverter",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Turns multiline text into safe JavaScript variables",
   "contributors": [
     {
