@@ -2,15 +2,11 @@ const assert = require('chai').assert;
 const stringConverter = require('../src/converter');
 
 describe('convertText', () => {
-  const ECMA6 = 'ecma6';
-  const ECMA5_SINGLE = 'ecma5single';
-  const ECMA5_DOUBLE = 'ecma5double';
-
   describe('Empty content', () => {
     describe('ECMA6', () => {
       it('Base example', () => {
         let results = stringConverter.convertText(
-          'someVariable', '', ECMA6, false, false, true, 'tabs'
+          'someVariable', '', stringConverter.ECMA6, false, false, true, 'tabs'
         );
 
         assert.equal(results, 'const someVariable = ``;');
@@ -18,7 +14,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', '', ECMA6, false, false, true, 'tabs'
+          '', '', stringConverter.ECMA6, false, false, true, 'tabs'
         );
 
         assert.equal(results, '\t``;');
@@ -26,7 +22,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', '', ECMA6, false, false, true, 'space4'
+          '', '', stringConverter.ECMA6, false, false, true, 'space4'
         );
 
         assert.equal(results, '    ``;');
@@ -34,17 +30,51 @@ describe('convertText', () => {
 
       it('Base example with no semi-colon', () => {
         let results = stringConverter.convertText(
-          'someVariable', '', ECMA6, false, false, false, 'tabs'
+          'someVariable', '', stringConverter.ECMA6, false, false, false, 'tabs'
         );
 
         assert.equal(results, 'const someVariable = ``');
       });
     });
 
+    describe('JSON', () => {
+      it('Base example', () => {
+        let results = stringConverter.convertText(
+          'someVariable', '', stringConverter.JSON_DOUBLE, false, false, true, 'tabs'
+        );
+
+        assert.equal(results, '{\n\t"someVariable": [\n\t\t""\n\t]\n}');
+      });
+
+      it('Base example with no variable name', () => {
+        let results = stringConverter.convertText(
+          '', '', stringConverter.JSON_DOUBLE, false, false, true, 'tabs'
+        );
+
+        assert.equal(results, '{\n\t"output": [\n\t\t""\n\t]\n}');
+      });
+
+      it('Base example with 4 spaces replacing tabs', () => {
+        let results = stringConverter.convertText(
+          '', '', stringConverter.JSON_DOUBLE, false, false, true, 'space4'
+        );
+
+        assert.equal(results, '{\n    "output": [\n        ""\n    ]\n}');
+      });
+
+      it('Base example with trimming', () => {
+        let results = stringConverter.convertText(
+          'someVariable', '', stringConverter.JSON_DOUBLE, false, true, false, 'tabs'
+        );
+
+        assert.equal(results, '{\n\t"someVariable": [\n\n\t]\n}');
+      });
+    });
+
     describe('ECMA5 Single Quote', () => {
       it('Base example', () => {
         let results = stringConverter.convertText(
-          'someVariable', '', ECMA5_SINGLE, false, false, true, 'tabs'
+          'someVariable', '', stringConverter.ECMA5_SINGLE, false, false, true, 'tabs'
         );
 
         assert.equal(results, 'var someVariable = \'\';');
@@ -52,7 +82,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', '', ECMA5_SINGLE, false, false, true, 'tabs'
+          '', '', stringConverter.ECMA5_SINGLE, false, false, true, 'tabs'
         );
 
         assert.equal(results, '\t\'\';');
@@ -60,7 +90,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', '', ECMA5_SINGLE, false, false, true, 'space4'
+          '', '', stringConverter.ECMA5_SINGLE, false, false, true, 'space4'
         );
 
         assert.equal(results, '    \'\';');
@@ -68,7 +98,7 @@ describe('convertText', () => {
 
       it('Base example with no semi-colon', () => {
         let results = stringConverter.convertText(
-          'someVariable', '', ECMA5_SINGLE, false, false, false, 'tabs'
+          'someVariable', '', stringConverter.ECMA5_SINGLE, false, false, false, 'tabs'
         );
 
         assert.equal(results, 'var someVariable = \'\'');
@@ -78,7 +108,7 @@ describe('convertText', () => {
     describe('ECMA5 Double Quote', () => {
       it('Base example', () => {
         let results = stringConverter.convertText(
-          'someVariable', '', ECMA5_DOUBLE, false, false, true, 'tabs'
+          'someVariable', '', stringConverter.ECMA5_DOUBLE, false, false, true, 'tabs'
         );
 
         assert.equal(results, 'var someVariable = "";');
@@ -86,7 +116,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', '', ECMA5_DOUBLE, false, false, true, 'tabs'
+          '', '', stringConverter.ECMA5_DOUBLE, false, false, true, 'tabs'
         );
 
         assert.equal(results, '\t"";');
@@ -94,7 +124,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', '', ECMA5_DOUBLE, false, false, true, 'space4'
+          '', '', stringConverter.ECMA5_DOUBLE, false, false, true, 'space4'
         );
 
         assert.equal(results, '    "";');
@@ -102,7 +132,7 @@ describe('convertText', () => {
 
       it('Base example with no semi-colon', () => {
         let results = stringConverter.convertText(
-          'someVariable', '', ECMA5_DOUBLE, false, false, false, 'tabs'
+          'someVariable', '', stringConverter.ECMA5_DOUBLE, false, false, false, 'tabs'
         );
 
         assert.equal(results, 'var someVariable = ""');
@@ -114,7 +144,7 @@ describe('convertText', () => {
     describe('ECMA6', () => {
       it('Base example', () => {
         let results = stringConverter.convertText(
-          'someVariable', 'some content', ECMA6, false, false, true, 'tabs'
+          'someVariable', 'some content', stringConverter.ECMA6, false, false, true, 'tabs'
         );
 
         assert.equal(results, 'const someVariable = `some content`;');
@@ -122,7 +152,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', 'some content', ECMA6, false, false, true, 'tabs'
+          '', 'some content', stringConverter.ECMA6, false, false, true, 'tabs'
         );
 
         assert.equal(results, '\t`some content`;');
@@ -130,7 +160,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', 'some content', ECMA6, false, false, true, 'space4'
+          '', 'some content', stringConverter.ECMA6, false, false, true, 'space4'
         );
 
         assert.equal(results, '    `some content`;');
@@ -138,10 +168,42 @@ describe('convertText', () => {
 
       it('Base example with no semi-colon', () => {
         let results = stringConverter.convertText(
-          'someVariable', 'some content', ECMA6, false, false, false, 'tabs'
+          'someVariable', 'some content', stringConverter.ECMA6, false, false, false, 'tabs'
         );
 
         assert.equal(results, 'const someVariable = `some content`');
+      });
+    });
+
+    describe('JSON', () => {
+      it('Base example', () => {
+        let results = stringConverter.convertText(
+          'someVariable',
+          'some content',
+          stringConverter.JSON_DOUBLE,
+          false,
+          false,
+          true,
+          'tabs'
+        );
+
+        assert.equal(results, '{\n\t"someVariable": [\n\t\t"some content"\n\t]\n}');
+      });
+
+      it('Base example with no variable name', () => {
+        let results = stringConverter.convertText(
+          '', 'some content', stringConverter.JSON_DOUBLE, false, false, true, 'tabs'
+        );
+
+        assert.equal(results, '{\n\t"output": [\n\t\t"some content"\n\t]\n}');
+      });
+
+      it('Base example with 4 spaces replacing tabs', () => {
+        let results = stringConverter.convertText(
+          '', 'some content', stringConverter.JSON_DOUBLE, false, false, true, 'space4'
+        );
+
+        assert.equal(results, '{\n    "output": [\n        "some content"\n    ]\n}');
       });
     });
 
@@ -150,7 +212,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           'some content',
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           false,
           false,
           true,
@@ -162,7 +224,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', 'some content', ECMA5_SINGLE, false, false, true, 'tabs'
+          '', 'some content', stringConverter.ECMA5_SINGLE, false, false, true, 'tabs'
         );
 
         assert.equal(results, '\t\'some content\';');
@@ -170,7 +232,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', 'some content', ECMA5_SINGLE, false, false, true, 'space4'
+          '', 'some content', stringConverter.ECMA5_SINGLE, false, false, true, 'space4'
         );
 
         assert.equal(results, '    \'some content\';');
@@ -180,7 +242,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           'some content',
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           false,
           false,
           false,
@@ -196,7 +258,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           'some content',
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           false,
           false,
           true,
@@ -208,7 +270,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', 'some content', ECMA5_DOUBLE, false, false, true, 'tabs'
+          '', 'some content', stringConverter.ECMA5_DOUBLE, false, false, true, 'tabs'
         );
 
         assert.equal(results, '\t"some content";');
@@ -216,7 +278,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', 'some content', ECMA5_DOUBLE, false, false, true, 'space4'
+          '', 'some content', stringConverter.ECMA5_DOUBLE, false, false, true, 'space4'
         );
 
         assert.equal(results, '    "some content";');
@@ -226,7 +288,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           'some content',
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           false,
           false,
           false,
@@ -244,7 +306,7 @@ describe('convertText', () => {
     describe('ECMA6', () => {
       it('Base example', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, false, false, true, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, false, false, true, 'tabs'
         );
 
         assert.equal(results, `const someVariable = \`${multiLineContent}\`;`);
@@ -252,7 +314,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, false, false, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA6, false, false, true, 'tabs'
         );
 
         assert.equal(results, `\t\`${multiLineContent}\`;`);
@@ -260,7 +322,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, false, false, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA6, false, false, true, 'space4'
         );
 
         assert.equal(results, `    \`${multiLineContent}\`;`);
@@ -268,10 +330,60 @@ describe('convertText', () => {
 
       it('Base example with no semi-colon', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, false, false, false, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, false, false, false, 'tabs'
         );
 
         assert.equal(results, `const someVariable = \`${multiLineContent}\``);
+      });
+    });
+
+    describe('ECMA5 Double Quote', () => {
+      it('Base example', () => {
+        let results = stringConverter.convertText(
+          'someVariable',
+          multiLineContent,
+          stringConverter.ECMA5_DOUBLE,
+          false,
+          false,
+          true,
+          'tabs'
+        );
+
+        assert.equal(
+          results, 'var someVariable = "Something" +\n\t"multi" +\n\t"line";'
+        );
+      });
+
+      it('Base example with no variable name', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, false, false, true, 'tabs'
+        );
+
+        assert.equal(results, '\t"Something" +\n\t"multi" +\n\t"line";');
+      });
+
+      it('Base example with 4 spaces replacing tabs', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, false, false, true, 'space4'
+        );
+
+        assert.equal(results, '    "Something" +\n    "multi" +\n    "line";');
+      });
+
+      it('Base example with no semi-colon', () => {
+        let results = stringConverter.convertText(
+          'someVariable',
+          multiLineContent,
+          stringConverter.ECMA5_DOUBLE,
+          false,
+          false,
+          false,
+          'tabs'
+        );
+
+        assert.equal(
+          results, 'var someVariable = "Something" +\n\t"multi" +\n\t"line"'
+        );
       });
     });
 
@@ -279,7 +391,7 @@ describe('convertText', () => {
       describe('Different tab spacing', () => {
         it('Base example with tabs replacing tabs', () => {
           let results = stringConverter.convertText(
-            '', multiLineContent, ECMA5_SINGLE, false, false, true, 'tabs'
+            '', multiLineContent, stringConverter.ECMA5_SINGLE, false, false, true, 'tabs'
           );
 
           assert.equal(
@@ -289,7 +401,7 @@ describe('convertText', () => {
 
         it('Base example with 2 spaces replacing tabs', () => {
           let results = stringConverter.convertText(
-            '', multiLineContent, ECMA5_SINGLE, false, false, true, 'space2'
+            '', multiLineContent, stringConverter.ECMA5_SINGLE, false, false, true, 'space2'
           );
 
           assert.equal(
@@ -299,7 +411,7 @@ describe('convertText', () => {
 
         it('Base example with 4 spaces replacing tabs', () => {
           let results = stringConverter.convertText(
-            '', multiLineContent, ECMA5_SINGLE, false, false, true, 'space4'
+            '', multiLineContent, stringConverter.ECMA5_SINGLE, false, false, true, 'space4'
           );
 
           assert.equal(
@@ -309,7 +421,7 @@ describe('convertText', () => {
 
         it('Base example with 8 spaces replacing tabs', () => {
           let results = stringConverter.convertText(
-            '', multiLineContent, ECMA5_SINGLE, false, false, true, 'space8'
+            '', multiLineContent, stringConverter.ECMA5_SINGLE, false, false, true, 'space8'
           );
 
           assert.equal(
@@ -322,7 +434,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           false,
           false,
           true,
@@ -337,7 +449,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_SINGLE, false, false, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_SINGLE, false, false, true, 'tabs'
         );
 
         assert.equal(results, '\t\'Something\' +\n\t\'multi\' +\n\t\'line\';');
@@ -347,7 +459,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           false,
           false,
           false,
@@ -366,7 +478,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           false,
           false,
           true,
@@ -380,7 +492,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, false, false, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, false, false, true, 'tabs'
         );
 
         assert.equal(results, '\t"Something" +\n\t"multi" +\n\t"line";');
@@ -388,7 +500,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, false, false, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, false, false, true, 'space4'
         );
 
         assert.equal(results, '    "Something" +\n    "multi" +\n    "line";');
@@ -398,7 +510,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           false,
           false,
           false,
@@ -419,7 +531,7 @@ describe('convertText', () => {
       const multiLineContentExpected = '\\`\n\'\n"';
       it('Base example', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, false, false, true, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, false, false, true, 'tabs'
         );
 
         assert.equal(
@@ -429,7 +541,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, false, false, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA6, false, false, true, 'tabs'
         );
 
         assert.equal(results, `\t\`${multiLineContentExpected}\`;`);
@@ -437,7 +549,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, false, false, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA6, false, false, true, 'space4'
         );
 
         assert.equal(results, `    \`${multiLineContentExpected}\`;`);
@@ -445,12 +557,51 @@ describe('convertText', () => {
 
       it('Base example with no semi-colon', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, false, false, false, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, false, false, false, 'tabs'
         );
 
         assert.equal(
           results, `const someVariable = \`${multiLineContentExpected}\``
         );
+      });
+    });
+
+    describe('JSON', () => {
+      const multiLineContentExpected = '[\n\t\t"`",\n\t\t"\'",\n\t\t"\\""\n\t]';
+      const multiLineContentExpectedSpaces = multiLineContentExpected.replace(
+        /\t/g, '    '
+      );
+
+      it('Base example', () => {
+        let results = stringConverter.convertText(
+          'someVariable',
+          multiLineContent,
+          stringConverter.JSON_DOUBLE,
+          false,
+          false,
+          true,
+          'tabs'
+        );
+
+        assert.equal(
+          results, `{\n\t"someVariable": ${multiLineContentExpected}\n}`
+        );
+      });
+
+      it('Base example with no variable name', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.JSON_DOUBLE, false, false, true, 'tabs'
+        );
+
+        assert.equal(results, `{\n\t"output": ${multiLineContentExpected}\n}`);
+      });
+
+      it('Base example with 4 spaces replacing tabs', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.JSON_DOUBLE, false, false, true, 'space4'
+        );
+
+        assert.equal(results, `{\n    "output": ${multiLineContentExpectedSpaces}\n}`);
       });
     });
 
@@ -464,7 +615,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           false,
           false,
           true,
@@ -478,7 +629,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_SINGLE, false, false, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_SINGLE, false, false, true, 'tabs'
         );
 
         assert.equal(results, `\t${multiLineContentExpected};`);
@@ -486,7 +637,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_SINGLE, false, false, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA5_SINGLE, false, false, true, 'space4'
         );
 
         assert.equal(results, `    ${multiLineContentExpectedSpaces};`);
@@ -496,7 +647,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           false,
           false,
           false,
@@ -517,7 +668,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           false,
           false,
           true,
@@ -531,7 +682,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, false, false, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, false, false, true, 'tabs'
         );
 
         assert.equal(results, `\t${multiLineContentExpected};`);
@@ -539,7 +690,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, false, false, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, false, false, true, 'space4'
         );
 
         assert.equal(results, `    ${multiLineContentExpectedSpaces};`);
@@ -549,7 +700,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           false,
           false,
           false,
@@ -569,7 +720,7 @@ describe('convertText', () => {
 
       it('Base example', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, false, true, true, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, false, true, true, 'tabs'
         );
 
         assert.equal(
@@ -579,7 +730,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, false, true, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA6, false, true, true, 'tabs'
         );
 
         assert.equal(results, `\t\`${multiLineContentExpected}\`;`);
@@ -587,7 +738,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, false, true, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA6, false, true, true, 'space4'
         );
 
         assert.equal(results, `    \`${multiLineContentExpected}\`;`);
@@ -595,12 +746,51 @@ describe('convertText', () => {
 
       it('Base example with no semi-colon', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, false, true, false, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, false, true, false, 'tabs'
         );
 
         assert.equal(
           results, `const someVariable = \`${multiLineContentExpected}\``
         );
+      });
+    });
+
+    describe('JSON', () => {
+      const multiLineContentExpected = '[\n\t\t"A",\n\t\t"."\n\t]';
+      const multiLineContentExpectedSpaces = multiLineContentExpected.replace(
+        /\t/g, '    '
+      );
+
+      it('Base example', () => {
+        let results = stringConverter.convertText(
+          'someVariable',
+          multiLineContent,
+          stringConverter.JSON_DOUBLE,
+          false,
+          true,
+          true,
+          'tabs'
+        );
+
+        assert.equal(
+          results, `{\n\t"someVariable": ${multiLineContentExpected}\n}`
+        );
+      });
+
+      it('Base example with no variable name', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.JSON_DOUBLE, false, true, true, 'tabs'
+        );
+
+        assert.equal(results, `{\n\t"output": ${multiLineContentExpected}\n}`);
+      });
+
+      it('Base example with 4 spaces replacing tabs', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.JSON_DOUBLE, false, true, true, 'space4'
+        );
+
+        assert.equal(results, `{\n    "output": ${multiLineContentExpectedSpaces}\n}`);
       });
     });
 
@@ -614,7 +804,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           false,
           true,
           true,
@@ -628,7 +818,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_SINGLE, false, true, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_SINGLE, false, true, true, 'tabs'
         );
 
         assert.equal(results, `\t${multiLineContentExpected};`);
@@ -636,7 +826,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_SINGLE, false, true, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA5_SINGLE, false, true, true, 'space4'
         );
 
         assert.equal(results, `    ${multiLineContentExpectedSpaces};`);
@@ -646,7 +836,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           false,
           true,
           false,
@@ -667,7 +857,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           false,
           true,
           true,
@@ -681,7 +871,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, false, true, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, false, true, true, 'tabs'
         );
 
         assert.equal(results, `\t${multiLineContentExpected};`);
@@ -689,7 +879,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, false, true, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, false, true, true, 'space4'
         );
 
         assert.equal(results, `    ${multiLineContentExpectedSpaces};`);
@@ -699,7 +889,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           false,
           true,
           false,
@@ -719,7 +909,7 @@ describe('convertText', () => {
 
       it('Base example', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, true, false, true, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, true, false, true, 'tabs'
         );
 
         assert.equal(
@@ -729,7 +919,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, true, false, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA6, true, false, true, 'tabs'
         );
 
         assert.equal(results, `\t\`${multiLineContentExpected}\`;`);
@@ -737,7 +927,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, true, false, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA6, true, false, true, 'space4'
         );
 
         assert.equal(results, `    \`${multiLineContentExpected}\`;`);
@@ -745,12 +935,51 @@ describe('convertText', () => {
 
       it('Base example with no semi-colon', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, true, false, false, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, true, false, false, 'tabs'
         );
 
         assert.equal(
           results, `const someVariable = \`${multiLineContentExpected}\``
         );
+      });
+    });
+
+    describe('JSON', () => {
+      const multiLineContentExpected = `[\n\t\t"\\n",\n\t\t"\\n",\n\t\t"\\n",\n\t\t"\\n",\n\t\t"\\n"\n\t]`;
+      const multiLineContentExpectedSpaces = multiLineContentExpected.replace(
+        /\t/g, '    '
+      );
+
+      it('Base example', () => {
+        let results = stringConverter.convertText(
+          'someVariable',
+          multiLineContent,
+          stringConverter.JSON_DOUBLE,
+          true,
+          false,
+          true,
+          'tabs'
+        );
+
+        assert.equal(
+          results, `{\n\t"someVariable": ${multiLineContentExpected}\n}`
+        );
+      });
+
+      it('Base example with no variable name', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.JSON_DOUBLE, true, false, true, 'tabs'
+        );
+
+        assert.equal(results, `{\n\t"output": ${multiLineContentExpected}\n}`);
+      });
+
+      it('Base example with 4 spaces replacing tabs', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.JSON_DOUBLE, true, false, true, 'space4'
+        );
+
+        assert.equal(results, `{\n    "output": ${multiLineContentExpectedSpaces}\n}`);
       });
     });
 
@@ -765,7 +994,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           true,
           false,
           true,
@@ -779,7 +1008,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_SINGLE, true, false, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_SINGLE, true, false, true, 'tabs'
         );
 
         assert.equal(results, `\t${multiLineContentExpected};`);
@@ -787,7 +1016,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_SINGLE, true, false, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA5_SINGLE, true, false, true, 'space4'
         );
         assert.equal(results, `    ${multiLineContentExpectedSpaces};`);
       });
@@ -796,7 +1025,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           true,
           false,
           false,
@@ -818,7 +1047,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           true,
           false,
           true,
@@ -832,7 +1061,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, true, false, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, true, false, true, 'tabs'
         );
 
         assert.equal(results, `\t${multiLineContentExpected};`);
@@ -840,7 +1069,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, true, false, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, true, false, true, 'space4'
         );
 
         assert.equal(results, `    ${multiLineContentExpectedSpaces};`);
@@ -850,7 +1079,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           true,
           false,
           false,
@@ -870,7 +1099,7 @@ describe('convertText', () => {
 
       it('Base example', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, false, true, true, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, false, true, true, 'tabs'
         );
 
         assert.equal(
@@ -880,7 +1109,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, false, true, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA6, false, true, true, 'tabs'
         );
 
         assert.equal(results, `\t\`${multiLineContentExpected}\`;`);
@@ -888,7 +1117,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, false, true, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA6, false, true, true, 'space4'
         );
 
         assert.equal(results, `    \`${multiLineContentExpected}\`;`);
@@ -896,12 +1125,50 @@ describe('convertText', () => {
 
       it('Base example with no semi-colon', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, false, true, false, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, false, true, false, 'tabs'
         );
 
         assert.equal(
           results, `const someVariable = \`${multiLineContentExpected}\``
         );
+      });
+    });
+
+    describe('JSON', () => {
+      const multiLineContentExpected = '[\n\t\t"A",\n\t\t"."\n\t]';
+      const multiLineContentExpectedSpaces = multiLineContentExpected.replace(
+        /\t/g, '    '
+      );
+      it('Base example', () => {
+        let results = stringConverter.convertText(
+          'someVariable',
+          multiLineContent,
+          stringConverter.JSON_DOUBLE,
+          false,
+          true,
+          true,
+          'tabs'
+        );
+
+        assert.equal(
+          results, `{\n\t"someVariable": ${multiLineContentExpected}\n}`
+        );
+      });
+
+      it('Base example with no variable name', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.JSON_DOUBLE, false, true, true, 'tabs'
+        );
+
+        assert.equal(results, `{\n\t"output": ${multiLineContentExpected}\n}`);
+      });
+
+      it('Base example with 4 spaces replacing tabs', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.JSON_DOUBLE, false, true, true, 'space4'
+        );
+
+        assert.equal(results, `{\n    "output": ${multiLineContentExpectedSpaces}\n}`);
       });
     });
 
@@ -915,7 +1182,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           false,
           true,
           true,
@@ -929,7 +1196,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_SINGLE, false, true, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_SINGLE, false, true, true, 'tabs'
         );
 
         assert.equal(results, `\t${multiLineContentExpected};`);
@@ -937,7 +1204,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_SINGLE, false, true, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA5_SINGLE, false, true, true, 'space4'
         );
 
         assert.equal(results, `    ${multiLineContentExpectedSpaces};`);
@@ -947,7 +1214,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           false,
           true,
           false,
@@ -968,7 +1235,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           false,
           true,
           true,
@@ -982,7 +1249,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, false, true, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, false, true, true, 'tabs'
         );
 
         assert.equal(results, `\t${multiLineContentExpected};`);
@@ -990,7 +1257,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, false, true, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, false, true, true, 'space4'
         );
 
         assert.equal(results, `    ${multiLineContentExpectedSpaces};`);
@@ -1000,7 +1267,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           false,
           true,
           false,
@@ -1020,7 +1287,7 @@ describe('convertText', () => {
 
       it('Base example', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, true, true, true, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, true, true, true, 'tabs'
         );
 
         assert.equal(
@@ -1030,7 +1297,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, true, true, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA6, true, true, true, 'tabs'
         );
 
         assert.equal(results, `\t\`${multiLineContentExpected}\`;`);
@@ -1038,7 +1305,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA6, true, true, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA6, true, true, true, 'space4'
         );
 
         assert.equal(results, `    \`${multiLineContentExpected}\`;`);
@@ -1046,12 +1313,51 @@ describe('convertText', () => {
 
       it('Base example with no semi-colon', () => {
         let results = stringConverter.convertText(
-          'someVariable', multiLineContent, ECMA6, true, true, false, 'tabs'
+          'someVariable', multiLineContent, stringConverter.ECMA6, true, true, false, 'tabs'
         );
 
         assert.equal(
           results, `const someVariable = \`${multiLineContentExpected}\``
         );
+      });
+    });
+
+    describe('JSON', () => {
+      const multiLineContentExpected = '[\n\t\t"A\\n",\n\t\t".\\n"\n\t]';
+      const multiLineContentExpectedSpaces = multiLineContentExpected.replace(
+        /\t/g, '    '
+      );
+
+      it('Base example', () => {
+        let results = stringConverter.convertText(
+          'someVariable',
+          multiLineContent,
+          stringConverter.JSON_DOUBLE,
+          true,
+          true,
+          true,
+          'tabs'
+        );
+
+        assert.equal(
+          results, `{\n\t"someVariable": ${multiLineContentExpected}\n}`
+        );
+      });
+
+      it('Base example with no variable name', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.JSON_DOUBLE, true, true, true, 'tabs'
+        );
+
+        assert.equal(results, `{\n\t"output": ${multiLineContentExpected}\n}`);
+      });
+
+      it('Base example with 4 spaces replacing tabs', () => {
+        let results = stringConverter.convertText(
+          '', multiLineContent, stringConverter.JSON_DOUBLE, true, true, true, 'space4'
+        );
+
+        assert.equal(results, `{\n    "output": ${multiLineContentExpectedSpaces}\n}`);
       });
     });
 
@@ -1065,7 +1371,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           true,
           true,
           true,
@@ -1079,7 +1385,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_SINGLE, true, true, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_SINGLE, true, true, true, 'tabs'
         );
 
         assert.equal(results, `\t${multiLineContentExpected};`);
@@ -1087,7 +1393,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_SINGLE, true, true, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA5_SINGLE, true, true, true, 'space4'
         );
 
         assert.equal(results, `    ${multiLineContentExpectedSpaces};`);
@@ -1097,7 +1403,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_SINGLE,
+          stringConverter.ECMA5_SINGLE,
           true,
           true,
           false,
@@ -1118,7 +1424,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           true,
           true,
           true,
@@ -1132,7 +1438,7 @@ describe('convertText', () => {
 
       it('Base example with no variable name', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, true, true, true, 'tabs'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, true, true, true, 'tabs'
         );
 
         assert.equal(results, `\t${multiLineContentExpected};`);
@@ -1140,7 +1446,7 @@ describe('convertText', () => {
 
       it('Base example with 4 spaces replacing tabs', () => {
         let results = stringConverter.convertText(
-          '', multiLineContent, ECMA5_DOUBLE, true, true, true, 'space4'
+          '', multiLineContent, stringConverter.ECMA5_DOUBLE, true, true, true, 'space4'
         );
 
         assert.equal(results, `    ${multiLineContentExpectedSpaces};`);
@@ -1150,7 +1456,7 @@ describe('convertText', () => {
         let results = stringConverter.convertText(
           'someVariable',
           multiLineContent,
-          ECMA5_DOUBLE,
+          stringConverter.ECMA5_DOUBLE,
           true,
           true,
           false,
