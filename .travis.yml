@@ -11,7 +11,8 @@ before_script:
 script:
 - npm run build
 - npm run test
-- npm run serve & && sleep 5 && npm run nightwatch
+- npm run serve &
+- sleep 5 && npm run nightwatch
 cache:
   directories:
   - node_modules
