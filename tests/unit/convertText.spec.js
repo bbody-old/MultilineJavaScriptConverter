@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const stringConverter = require('../src/converter');
+const stringConverter = require('../../src/converter');
 
 describe('convertText', () => {
   describe('Empty content', () => {
