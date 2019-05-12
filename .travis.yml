@@ -8,10 +8,9 @@ before_script:
 - npm run selenium-setup
 - mkdir dist
 - mkdir dist/js
+- npm run build && npm run serve &
 script:
-- npm run build
 - npm run test
-- npm run serve &
 - sleep 5 && npm run nightwatch
 cache:
   directories:
