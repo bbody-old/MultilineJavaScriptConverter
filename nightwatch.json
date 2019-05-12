@@ -2,7 +2,7 @@
   "src_folders" : ["tests/e2e"],
 
   "webdriver" : {
-    "start_process": true,
+    "start_process": false,
     "server_path": "node_modules/.bin/chromedriver",
     "port": 9515
   },

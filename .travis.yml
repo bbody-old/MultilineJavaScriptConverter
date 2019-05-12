@@ -8,6 +8,7 @@ before_script:
 - npm install
 - npm run setup
 - npm run selenium-setup
+- ./node_modules/.bin/chromedriver &
 - mkdir dist
 - mkdir dist/js
 - npm run build && npm run serve &
