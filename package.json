@@ -27,6 +27,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-minify": "^0.4.3",
     "chai": "^4.1.2",
+    "chromedriver": "^74.0.0",
     "coveralls": "^3.0.2",
     "eslint": "^5.7.0",
     "eslint-config-standard": "^12.0.0",
@@ -37,10 +38,12 @@
     "gh-pages": "^1.2.0",
     "husky": "^1.1.2",
     "mocha": "^5.2.0",
+    "nightwatch": "^1.0.19",
     "node-sass": "^4.9.2",
     "nyc": "^12.0.2",
     "pug": "^2.0.3",
-    "requirejs": "^2.3.5"
+    "requirejs": "^2.3.5",
+    "selenium-standalone": "^6.16.0"
   },
   "scripts": {
     "build": "npm run css && npm run html && npm run js && npm run favicon",
@@ -53,11 +56,13 @@
     "js:compile": "npx babel dist/js/script.js --out-file dist/js/script.js --source-maps",
     "js:compile:prod": "npx babel dist/js/script.js",
     "js:prod": "npm run js:build && npm run js:compile:prod",
-    "linter": "eslint *.js && eslint src/*.js && eslint test/*.js",
-    "mocha": "nyc --reporter=text -n src/converter.js mocha",
+    "linter": "eslint *.js && eslint src/*.js && eslint tests/**/*.js",
+    "mocha": "nyc --reporter=text -n src/converter.js mocha tests/unit",
     "setup": "npm install -g mocha npx && npm install copyfiles -g && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify && npm install -g eslint && npm install -g mkdirp",
     "serve": "http-server dist",
-    "test": "npm run linter && npm run mocha"
+    "test": "npm run linter && npm run mocha",
+    "selenium-setup": "selenium-standalone install",
+    "nightwatch": "nightwatch"
   },
   "main": "./src/converter.js",
   "repository": {
@@ -71,7 +76,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm test",
+      "pre-push": "npm run mocha",
       "pre-commit": "npm run linter"
     }
   }
