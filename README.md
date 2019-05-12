@@ -87,11 +87,12 @@ Run the below the first time:
 
 `npm run selenium-setup`
 
-Followed by
+The below must be running every time tests are run:
 
 `npm run serve`
+`node_modules/.bin/chromedriver`
 
-Then
+To run the tests run the below:
 
 `npm run nightwatch`
 
