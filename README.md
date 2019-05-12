@@ -51,16 +51,16 @@ Inside your Node project:
 | Field # | Field Name | Valid Values |
 |:-------:| ---------- | ------------ |
 | 1 | Variable name | Any string |
-| 2 | Input variables | String separated by '\n' or Array |
-| 3 | String type | ECMA_DOUBLE/ECMA_SINGLE/ECMA6/JSON_DOUBLE |
-| 4 | Add new lines | true/false |
-| 5 | Trim whitespace | true/false |
-| 6 | Semicolon (N/A for JSON_DOUBLE) | true/false |
-| 7 | Spaces | TAB/SPACES_2/SPACES_4/SPACES_8 |
+| 2 | Input variables | String separated by *\n* or Array |
+| 3 | String type | *ECMA_DOUBLE*/*ECMA_SINGLE*/*ECMA6*/*JSON_DOUBLE* |
+| 4 | Add new lines | *true*/*false* |
+| 5 | Trim whitespace | *true*/*false* |
+| 6 | Semicolon (N/A for JSON_DOUBLE) | *true*/*false* |
+| 7 | Spaces | *TAB*/*SPACES_2*/*SPACES_4*/*SPACES_8* |
 
 Below constants can be imported from the library:
-- **String types:** ECMA_DOUBLE/ECMA_SINGLE/ECMA6/JSON_DOUBLE
-- **Space types:** TAB/SPACES_2/SPACES_4/SPACES_8
+- **String types:** *ECMA_DOUBLE*/*ECMA_SINGLE*/*ECMA6*/*JSON_DOUBLE*
+- **Space types:** *TAB*/*SPACES_2*/*SPACES_4*/*SPACES_8*
 
 ## Getting setup
 1. Download repository
