@@ -25,7 +25,7 @@ before_script:
 - ./node_modules/.bin/chromedriver &
 - mkdir dist
 - mkdir dist/js
-- npm run build && npm run serve &
+- npm run build && npm run html:production && npm run serve &
 script:
 - npm run test
 - npm run nightwatch

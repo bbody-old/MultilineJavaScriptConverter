@@ -2,8 +2,10 @@ const pug = require('pug');
 const fs = require('fs');
 const variables = require('./index.json');
 const pkg = require('./package.json');
+const args = process.argv.slice(2);
 
 variables.package = pkg;
+variables.environment = args[0] === 'production';
 
 const html = pug.renderFile('index.pug', variables);
 
