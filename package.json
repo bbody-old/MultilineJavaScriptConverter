@@ -1,6 +1,6 @@
 {
   "name": "multilinejavascriptconverter",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Turns multiline text into safe JavaScript variables",
   "contributors": [
     {
@@ -46,7 +46,8 @@
     "selenium-standalone": "^6.16.0"
   },
   "scripts": {
-    "build": "npm run css && npm run js && npm run favicon",
+    "build": "npm run css && npm run html:development && npm run js && npm run favicon",
+    "build:production": "npm run css && npm run html:production && npm run js && npm run favicon",
     "css": "node-sass scss/style.scss dist/css/style.css --output-style compressed --source-map dist/css",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "favicon": "copyfiles -f favicons/*.* dist/",

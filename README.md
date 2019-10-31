@@ -68,7 +68,7 @@ Below constants can be imported from the library:
 3. Run `npm run setup` to install dependencies
 
 ### Build all
-`npm run build && npm run html:development`
+`npm run build`
 
 ### Run site
 `npm run serve`
