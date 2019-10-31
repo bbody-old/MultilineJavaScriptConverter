@@ -5,7 +5,8 @@
 		],
 		"scripts_async": [
 			"//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js",
-			"https://www.googletagmanager.com/gtag/js?id=UA-117132942-1"
+			"https://www.googletagmanager.com/gtag/js?id=UA-117132942-1",
+			"https://codefund.io/properties/552/funder.js"
 		],
 		"stylesheets": [
 			"//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css",
