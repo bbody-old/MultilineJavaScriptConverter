@@ -4,7 +4,9 @@
 			"js/script.js"
 		],
 		"scripts_async": [
-			"//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js",
+			"//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"
+		],
+		"scripts_async_production": [
 			"https://www.googletagmanager.com/gtag/js?id=UA-117132942-1",
 			"https://codefund.io/properties/552/funder.js"
 		],

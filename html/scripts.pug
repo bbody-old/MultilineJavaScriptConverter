@@ -2,6 +2,9 @@ each script in includes.scripts
 	script(type='text/javascript' src= script)
 each script in includes.scripts_async
 	script(type='text/javascript' src= script async)
+if production
+	each script in includes.scripts_async_production
+		script(type='text/javascript' src= script async)
 include ./analytics.pug
 
 script.
