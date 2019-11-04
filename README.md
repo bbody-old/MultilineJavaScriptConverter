@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/bbody/MultilineJavaScriptConverter/badge.svg?branch=master)](https://coveralls.io/github/bbody/MultilineJavaScriptConverter?branch=master)
+
 # Multiline JavaScript Converter
 ## Description
 Multiline JavaScript Converter is a tool to convert strings into JavaScript safe text. It is able to account for new lines, special characters and able to produce multiple string types.

@@ -1,0 +1,37 @@
+name: Deployment
+
+on:
+  push:
+    branch:
+      - master
+    tags:
+      - '*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '8.x'
+    - run: mkdir dist
+    - run: mkdir dist/js
+    - run: npm install
+    - run: npm run setup
+    - run: npm run build
+    - run: npm run html:production
+    - name: GitHub Pages Deployment
+      uses: crazy-max/ghaction-github-pages@v0.1.0
+      if: success()
+      with:
+        target_branch: gh-pages
+        build_dir: dist
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: NPM Release
+      if: success()
+      uses: primer/publish@master
+      env:
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
