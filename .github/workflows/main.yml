@@ -22,8 +22,8 @@ jobs:
     - run: npm install
     - run: npm test
     # - run: npm run nightwatch
-    - run: npm run coverage
-    - name: Build and Deploy
+    # - run: npm run coverage
+    - name: Github Pages Deploy
       uses: JamesIves/github-pages-deploy-action@master
       env:
         ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
