@@ -25,10 +25,6 @@ jobs:
     - run: npm run coverage
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@master
-      on:
-        push:	
-          branches:	
-            - master
       env:
         ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BASE_BRANCH: master # The branch the action should deploy from.
