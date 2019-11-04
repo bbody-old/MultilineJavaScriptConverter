@@ -21,7 +21,7 @@ jobs:
     - run: npm install
     - run: npm run setup
     - run: npm test
-    - run: npm run nightwatch
+    # - run: npm run nightwatch
     - run: npm run coverage
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@master
