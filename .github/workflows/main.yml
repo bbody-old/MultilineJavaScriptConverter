@@ -21,7 +21,19 @@ jobs:
     - run: npm run build && npm run serve &
     - run: npm test
     - run: npm run nightwatch
-    - run: npm run coverage
+    - name: Unit Test Coverage
+      run: npm run coverage
+      env:
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+    - run: npm run html:production
+    - name: GitHub Pages Deployment
+      uses: crazy-max/ghaction-github-pages@v0.1.0
+      if: success()
+      with:
+        target_branch: gh-pages
+        build_dir: dist
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     # - name: Github Pages Deploy
     #   uses: JamesIves/github-pages-deploy-action@master
     #   env:
