@@ -17,9 +17,9 @@ jobs:
     # - run: ./node_modules/.bin/chromedriver &
     - run: mkdir dist
     - run: mkdir dist/js
+    - run: npm run setup
     - run: npm run build && npm run serve &
     - run: npm install
-    - run: npm run setup
     - run: npm test
     # - run: npm run nightwatch
     - run: npm run coverage
