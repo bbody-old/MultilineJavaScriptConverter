@@ -22,8 +22,8 @@ jobs:
     - run: npm test
     - run: npm run nightwatch
     - name: Unit Test Coverage
-      run: npm run coverage
       env:
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         COVERALLS_SERVICE_NAME: github
+      run: npm run coverage
     
