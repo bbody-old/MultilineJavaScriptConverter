@@ -21,10 +21,10 @@ jobs:
     - run: npm run build && npm run serve &
     - run: npm test
     - run: npm run nightwatch
-    - name: Unit Test Coverage
-      run: npm run coverage
-      env:
-        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+    # - name: Unit Test Coverage
+    #   run: npm run coverage
+    #   env:
+    #     COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
     - run: npm run html:production
     - name: GitHub Pages Deployment
       uses: crazy-max/ghaction-github-pages@v0.1.0
