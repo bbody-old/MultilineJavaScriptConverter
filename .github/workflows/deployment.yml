@@ -1,5 +1,5 @@
 name: Deployment
-
+needs: test
 on:
   push:
     branch:
@@ -9,7 +9,6 @@ on:
 
 jobs:
   deploy:
-    needs: test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
