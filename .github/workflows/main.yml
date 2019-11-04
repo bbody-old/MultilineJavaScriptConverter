@@ -14,11 +14,11 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '8.x'
-    - run: ./node_modules/.bin/chromedriver &
+    # - run: ./node_modules/.bin/chromedriver &
     - run: mkdir dist
     - run: mkdir dist/js
     - run: npm install
     - run: npm run setup
     - run: npm test
-    # - run: npm run nightwatch
+    - run: npm run nightwatch
     - run: npm run coverage
