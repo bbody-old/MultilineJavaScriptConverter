@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/bbody/MultilineJavaScriptConverter.svg?branch=master)](https://travis-ci.org/bbody/MultilineJavaScriptConverterMultilineJavaScriptConverter)
-[![Coverage Status](https://coveralls.io/repos/github/bbody/MultilineJavaScriptConverter/badge.svg?branch=master)](https://coveralls.io/github/bbody/MultilineJavaScriptConverter?branch=master)
-
 # Multiline JavaScript Converter
 ## Description
 Multiline JavaScript Converter is a tool to convert strings into JavaScript safe text. It is able to account for new lines, special characters and able to produce multiple string types.
@@ -124,6 +121,7 @@ To run the tests run the below:
 - [Chai](http://www.chaijs.com/) - for assertions in Mocha
 - [Nightwatch](https://nightwatchjs.org) - for E2E testing
 - [ESLint](https://eslint.org/) - for linting of JS files
+- [Github Actions](https://github.com/actions) - for CI and deployment
 
 ## Bugs and suggestions
 If you find any bugs or have any suggestions on how to improve Multiline JavaScript Converter please post in the [Github issues](https://github.com/bbody/MultilineJavaScriptConverter/issues).

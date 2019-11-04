@@ -21,7 +21,7 @@ jobs:
     - run: npm run build && npm run serve &
     - run: npm test
     - run: npm run nightwatch
-    - run: npm run coverage
+    # - run: npm run coverage
     # - name: Github Pages Deploy
     #   uses: JamesIves/github-pages-deploy-action@master
     #   env:
