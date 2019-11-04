@@ -1,5 +1,4 @@
 name: Deployment
-needs: test
 on:
   push:
     branch:
@@ -11,6 +10,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+    - run: export CHROME_BIN=chromium-browser
+    - run: export DISPLAY=:99.0
+    - run: Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+    - run: sleep 5
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
       with:
