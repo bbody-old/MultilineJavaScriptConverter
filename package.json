@@ -48,7 +48,7 @@
   "scripts": {
     "build": "npm run css && npm run html:development && npm run js && npm run favicon",
     "css": "node-sass scss/style.scss dist/css/style.css --output-style compressed --source-map dist/css",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=lcov",
     "favicon": "copyfiles -f favicons/*.* dist/",
     "html:development": "node ./html-compile.js development",
     "html:production": "node ./html-compile.js production",
