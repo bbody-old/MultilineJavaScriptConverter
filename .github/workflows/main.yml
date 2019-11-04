@@ -17,8 +17,21 @@ jobs:
     # - run: ./node_modules/.bin/chromedriver &
     - run: mkdir dist
     - run: mkdir dist/js
+    - run: npm run build && npm run serve &
     - run: npm install
     - run: npm run setup
     - run: npm test
     - run: npm run nightwatch
     - run: npm run coverage
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@master
+      on:
+        push:	
+          branches:	
+            - master
+      env:
+        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BASE_BRANCH: master # The branch the action should deploy from.
+        BRANCH: gh-pages # The branch the action should deploy to.
+        FOLDER: dist # The folder the action should deploy.
+        BUILD_SCRIPT: npm run html:production # The build script the action should run prior to deploying.
