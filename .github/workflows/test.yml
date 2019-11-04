@@ -2,8 +2,8 @@ name: Test
 
 on:
   push:
-    tags:
-      - '!*'
+    branches:
+      - '!refs/tags/*'
 jobs:
   test:
     runs-on: ubuntu-latest
