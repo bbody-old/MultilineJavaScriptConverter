@@ -21,19 +21,15 @@ jobs:
     - run: npm install
     - run: npm run setup
     - run: npm run build
-    - run: npm run html:production
     - name: GitHub Pages Deployment
-      uses: crazy-max/ghaction-github-pages@v0.1.0
+      uses: JamesIves/github-pages-deploy-action@master
       if: success()
-      with:
-        target_branch: gh-pages
-        build_dir: dist
-        commit_name: github-actions
-        repo: git@github.com:bbody/MultilineJavaScriptConverter.git
-        commit_message:  Deploy to jsstringconverter.bbody.io
       env:
-        GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: dist
+        CNAME: jsstringconverter.bbody.io
+        BUILD_SCRIPT: npm run html:production
     - name: NPM Release
       if: success()
       uses: primer/publish@master
