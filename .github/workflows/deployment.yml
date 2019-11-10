@@ -29,6 +29,7 @@ jobs:
         target_branch: gh-pages
         build_dir: dist
         commit_name: github-actions
+        repo: git@github.com:bbody/MultilineJavaScriptConverter.git
         commit_message:  Deploy to jsstringconverter.bbody.io
       env:
         GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
