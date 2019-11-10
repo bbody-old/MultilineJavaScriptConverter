@@ -22,14 +22,14 @@ jobs:
     - run: npm run setup
     - run: npm run build
     - run: npm run html:production
-    - name: GitHub Pages Deployment
-      uses: crazy-max/ghaction-github-pages@v0.1.0
-      if: success()
-      with:
-        target_branch: gh-pages
-        build_dir: dist
-      env:
-        GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
+    # - name: GitHub Pages Deployment
+    #   uses: crazy-max/ghaction-github-pages@v0.1.0
+    #   if: success()
+    #   with:
+    #     target_branch: gh-pages
+    #     build_dir: dist
+    #   env:
+    #     GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
     - name: NPM Release
       if: success()
       uses: primer/publish@master
