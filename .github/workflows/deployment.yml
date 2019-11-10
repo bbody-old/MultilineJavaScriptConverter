@@ -25,11 +25,11 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@master
       if: success()
       env:
-        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.GITHUB_PAT }}
         BRANCH: gh-pages
         FOLDER: dist
         CNAME: jsstringconverter.bbody.io
-        BUILD_SCRIPT: npm run html:production
+        BUILD_SCRIPT: rm package.json && npm run html:production
         GITHUB_REPOSITORY: git@github.com:bbody/MultilineJavaScriptConverter.git
     - name: NPM Release
       if: success()
