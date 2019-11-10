@@ -30,6 +30,7 @@ jobs:
         FOLDER: dist
         CNAME: jsstringconverter.bbody.io
         BUILD_SCRIPT: npm run html:production
+        GITHUB_REPOSITORY: git@github.com:bbody/MultilineJavaScriptConverter.git
     - name: NPM Release
       if: success()
       uses: primer/publish@master
