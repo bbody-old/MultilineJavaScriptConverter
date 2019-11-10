@@ -16,7 +16,6 @@
 			"css/style.css"
 		],
 		"fonts": [
-			"//fonts.googleapis.com/css?family=Raleway:400,300,600",
 			"//fonts.googleapis.com/css?family=Ubuntu+Mono"
 		],
 		"favicon": "favicon.ico"
