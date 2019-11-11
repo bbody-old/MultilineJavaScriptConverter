@@ -4,7 +4,8 @@
 ## Description
 Multiline JavaScript Converter is a tool to convert strings into JavaScript safe text. It is able to account for new lines, special characters and able to produce multiple string types.
 
-[Multiline JavaScript Converter tool](http://jsstringconverter.bbody.io/)
+- [Multiline JavaScript Converter tool](http://jsstringconverter.bbody.io/)
+- [Blog post](https://www.brendonbody.com/2019/11/12/multiline-javascript-converter/)
 
 ![Demo of Multiline JavaScript Converter](https://raw.githubusercontent.com/bbody/MultilineJavaScriptConverter/master/screenshots/demo.gif "Demo of Multiline JavaScript Converter")
 
