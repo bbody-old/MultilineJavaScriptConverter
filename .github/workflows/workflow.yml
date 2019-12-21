@@ -71,7 +71,7 @@ jobs:
         path: dist
         key: ${{ runner.os }}-build-cache
     - name: Build production HTML
-      run: npm run html:production
+      run: npm install -g pug && npm run html:production
     - name: NPM Release
       if: success()
       uses: primer/publish@98ad69579953cde83bda5ddebc4c64163c0994fe
