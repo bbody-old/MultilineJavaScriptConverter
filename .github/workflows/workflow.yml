@@ -52,6 +52,8 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '8.x'
+    - name: Setup environment
+      run: npm install && npm run setup
     - name: NPM Release
       if: success()
       uses: primer/publish@98ad69579953cde83bda5ddebc4c64163c0994fe
