@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - master
-
 jobs:
   test:
     name: Build and Test
@@ -17,33 +16,36 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '8.x'
-    - run: mkdir dist
-    - run: mkdir dist/js
-    - run: npm install
-    - run: npm run setup
-    - run: npm run build && npm run serve &
-    - run: npm test
-    - run: npm run nightwatch
-    - run: npm run coverage
+    - name: Setup folder
+      run: mkdir dist && mkdir dist/js
+    - name: Setup environment
+      run: npm install && npm run setup
+    - name: Build
+      run: npm run build
+    - name: Serve assets
+      run: npm run serve &
+    - name: Run unit tests
+      run: npm test
+    - name: Run UI tests
+      run: npm run nightwatch
+    - name: Calculate coverage
+      run: npm run coverage
     - name: Unit Test Coverage
       uses: coverallsapp/github-action@23ce47a9de7d33a4bfcde960b03ea5504a78b75d
       with:
         github-token: ${{ secrets.github_token }}
+    - name: Cache Build
+      id: build-cache
+      uses: actions/cache@v1
+      with:
+        path: dist
+        key: ${{ runner.os }}-build-cache
   deploy:
     name: Deploy
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '8.x'
-    - run: mkdir dist
-    - run: mkdir dist/js
-    - run: npm install
-    - run: npm run setup
-    - run: npm run build
     - name: NPM Release
       if: success()
       uses: primer/publish@98ad69579953cde83bda5ddebc4c64163c0994fe
