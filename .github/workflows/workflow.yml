@@ -16,6 +16,12 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '8.x'
+    - name: Cache Node Modules
+      id: node-modules-cache
+      uses: actions/cache@v1
+      with:
+        path: dist
+        key: ${{ runner.os }}-node-modules
     - name: Setup folder
       run: mkdir dist && mkdir dist/js
     - name: Setup environment
@@ -42,8 +48,6 @@ jobs:
       uses: coverallsapp/github-action@23ce47a9de7d33a4bfcde960b03ea5504a78b75d
       with:
         github-token: ${{ secrets.github_token }}
-    - name: Build production HTML
-      run: npm run html:production
   deploy:
     name: Deploy
     needs: test
@@ -54,8 +58,20 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '8.x'
-    - name: Setup environment
-      run: npm install && npm run setup
+    - name: Cache Node Modules
+      id: node-modules-cache
+      uses: actions/cache@v1
+      with:
+        path: dist
+        key: ${{ runner.os }}-node-modules
+    - name: Cache Build
+      id: build-cache
+      uses: actions/cache@v1
+      with:
+        path: dist
+        key: ${{ runner.os }}-build-cache
+    - name: Build production HTML
+      run: npm run html:production
     - name: NPM Release
       if: success()
       uses: primer/publish@98ad69579953cde83bda5ddebc4c64163c0994fe
