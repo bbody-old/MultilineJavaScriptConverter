@@ -23,8 +23,10 @@ jobs:
     - name: Build
       run: npm run build
     - name: Serve assets
+      if: success()
       run: npm run serve &
     - name: Run unit tests
+      if: success()
       run: npm test
     - name: Run UI tests
       run: npm run nightwatch
@@ -60,7 +62,7 @@ jobs:
         BRANCH: gh-pages
         FOLDER: dist
         CNAME: jsstringconverter.bbody.io
-        BUILD_SCRIPT: npm run html:production && rm package.json
+        BUILD_SCRIPT: npm run html:production
         GITHUB_REPOSITORY: git@github.com:bbody/MultilineJavaScriptConverter.git
     
 
