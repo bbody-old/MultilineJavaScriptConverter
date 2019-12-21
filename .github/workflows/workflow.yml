@@ -42,6 +42,8 @@ jobs:
       uses: coverallsapp/github-action@23ce47a9de7d33a4bfcde960b03ea5504a78b75d
       with:
         github-token: ${{ secrets.github_token }}
+    - name: Build production HTML
+      run: npm run html:production
   deploy:
     name: Deploy
     needs: test
@@ -68,7 +70,7 @@ jobs:
         BRANCH: gh-pages
         FOLDER: dist
         CNAME: jsstringconverter.bbody.io
-        BUILD_SCRIPT: npm run html:production && rm package.json
+        BUILD_SCRIPT: rm package.json
         GITHUB_REPOSITORY: git@github.com:bbody/MultilineJavaScriptConverter.git
     
 
