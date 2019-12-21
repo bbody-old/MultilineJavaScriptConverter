@@ -61,7 +61,7 @@ jobs:
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: GitHub Pages Deployment
-      uses: JamesIves/github-pages-deploy-action@ffb7e936c55fcd4f395ee1f2387470419e2f4c65
+      uses: JamesIves/github-pages-deploy-action@master
       if: success()
       env:
         ACCESS_TOKEN: ${{ secrets.GITHUB_PAT }}
