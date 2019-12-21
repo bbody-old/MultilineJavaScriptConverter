@@ -59,7 +59,7 @@
     "js:prod": "npm run js:build && npm run js:compile:prod",
     "linter": "eslint *.js && eslint src/*.js && eslint tests/**/*.js",
     "mocha": "nyc --reporter=text -n src/converter.js mocha tests/unit",
-    "setup": "npm install -g mocha npx && npm install -g copyfiles && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify && npm install -g eslint && npm install -g mkdirp",
+    "setup": "npm install -g mocha && npm install -g npx && npm install -g copyfiles && npm install -g delete && npm install -g mocha && npm install -g http-server && npm install -g node-sass && npm install -g babel && npm install -g browserify && npm install -g eslint && npm install -g mkdirp",
     "serve": "http-server dist",
     "test": "npm run linter && npm run mocha",
     "selenium-setup": "selenium-standalone install",
