@@ -48,6 +48,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '8.x'
     - name: NPM Release
       if: success()
       uses: primer/publish@98ad69579953cde83bda5ddebc4c64163c0994fe
@@ -62,7 +66,7 @@ jobs:
         BRANCH: gh-pages
         FOLDER: dist
         CNAME: jsstringconverter.bbody.io
-        BUILD_SCRIPT: npm run html:production
+        BUILD_SCRIPT: npm run html:production && rm package.json
         GITHUB_REPOSITORY: git@github.com:bbody/MultilineJavaScriptConverter.git
     
 
