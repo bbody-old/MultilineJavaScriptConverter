@@ -46,6 +46,8 @@ jobs:
       uses: coverallsapp/github-action@23ce47a9de7d33a4bfcde960b03ea5504a78b75d
       with:
         github-token: ${{ secrets.github_token }}
+    - name: Build production HTML
+      run: npm install -g pug && npm run html:production
   deploy:
     name: Deploy
     needs: test
@@ -68,8 +70,6 @@ jobs:
       with:
         path: dist
         key: ${{ runner.os }}-build-cache
-    - name: Build production HTML
-      run: npm install -g pug && npm run html:production
     - name: NPM Release
       if: success()
       uses: primer/publish@98ad69579953cde83bda5ddebc4c64163c0994fe
