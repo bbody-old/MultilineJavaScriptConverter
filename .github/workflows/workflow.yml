@@ -1,12 +1,10 @@
-name: Deployment
+name: Build, Test and Deployment
 on:
   push:
     branches:
       - master
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
   test:
     name: Build and Test
     runs-on: ubuntu-latest
