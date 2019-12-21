@@ -22,8 +22,6 @@ jobs:
       with:
         path: dist
         key: ${{ runner.os }}-node-modules
-    - name: Setup folder
-      run: mkdir dist && mkdir dist/js
     - name: Setup environment
       run: npm install && npm run setup
     - name: Cache Build
