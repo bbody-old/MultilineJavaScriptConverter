@@ -1,7 +1,8 @@
 {
 	"includes": {
 		"scripts": [
-			"js/script.js"
+			"js/script.js",
+			"https://cdn.issueembed.dev/issue-embed.min.js"
 		],
 		"scripts_async": [
 			"//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"
