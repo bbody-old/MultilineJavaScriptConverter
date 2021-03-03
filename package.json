@@ -41,7 +41,7 @@
     "nightwatch": "^1.5.0",
     "node-sass": "^4.13.0",
     "nyc": "^12.0.2",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "requirejs": "^2.3.6",
     "selenium-standalone": "^6.20.1"
   },
