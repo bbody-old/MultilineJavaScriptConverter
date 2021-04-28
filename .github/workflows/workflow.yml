@@ -72,13 +72,12 @@ jobs:
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: Delete package.json
+        run: rm package.json
       - name: GitHub Pages Deployment
         uses: JamesIves/github-pages-deploy-action@releases/v4
         if: success()
-        env:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_PAT }}
-          BRANCH: gh-pages
-          FOLDER: dist
-          CNAME: jsstringconverter.bbody.io
-          BUILD_SCRIPT: rm package.json
-          GITHUB_REPOSITORY: git@github.com:bbody/MultilineJavaScriptConverter.git
+        with:
+          branch: gh-pages
+          folder: dist
+          ssh-key: ${{ secrets.GITHUB_PAT }}
