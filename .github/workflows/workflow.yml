@@ -45,8 +45,8 @@ jobs:
         github-token: ${{ secrets.github_token }}
     - name: Build production HTML
       run: npm install -g pug && npm run html:production
-  deploy:
-    name: Deploy
+  deploy_npm:
+    name: Deploy to NPM
     runs-on: ubuntu-latest
     needs: test
     if: startsWith(github.ref, 'refs/tags/')
@@ -72,12 +72,35 @@ jobs:
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_AUTH_TOKEN }}
-      - name: Delete package.json
-        run: rm package.json
-      - name: GitHub Pages Deployment
-        uses: JamesIves/github-pages-deploy-action@releases/v4
-        if: success()
-        with:
-          branch: gh-pages
-          folder: dist
-          token: ${{ secrets.GITHUB_PAT }}
+  deploy_gh_pages:
+      name: Deploy to GitHub Pages
+      runs-on: ubuntu-latest
+      needs: test
+      if: startsWith(github.ref, 'refs/tags/')
+      steps:
+        - uses: actions/checkout@v1
+        - uses: actions/setup-node@v1
+          with:
+            node-version: "8.x"
+        - name: Cache Node Modules
+          id: node-modules-cache
+          uses: actions/cache@v1
+          with:
+            path: dist
+            key: ${{ runner.os }}-node-modules
+        - name: Cache Build
+          id: build-cache
+          uses: actions/cache@v1
+          with:
+            path: dist
+            key: ${{ runner.os }}-build-cache
+        - name: Delete package.json
+          run: rm package.json
+        - name: GitHub Pages Deployment
+          uses: JamesIves/github-pages-deploy-action@releases/v4
+          if: success()
+          with:
+            branch: gh-pages
+            folder: dist
+            clean: true
+            token: ${{ secrets.GITHUB_PAT }}
