@@ -80,4 +80,4 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
-          ssh-key: ${{ secrets.GITHUB_PAT }}
+          token: ${{ secrets.GITHUB_PAT }}
