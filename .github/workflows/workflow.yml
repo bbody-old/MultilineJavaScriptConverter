@@ -102,4 +102,3 @@ jobs:
             branch: gh-pages
             folder: dist
             single-commit: true
-            token: ${{ secrets.GITHUB_PAT }}
