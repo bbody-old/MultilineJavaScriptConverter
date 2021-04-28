@@ -1,22 +1,21 @@
 each script in includes.scripts
-	script(type='text/javascript' src= script)
+	script(type='text/javascript' src=script)
 each script in includes.scripts_async
-	script(type='text/javascript' src= script async)
+	script(type='text/javascript' src=script async)
 if production
 	each script in includes.scripts_async_production
-		script(type='text/javascript' src= script async)
+		script(type='text/javascript' src=script async)
 include ./analytics.pug
 
 script.
-	window.onload=function(){
+	window.onload= function() {
 		// Initialize clipboard editing
 		new ClipboardJS('#copy');
-	}
 
-script.
-	window.onload = function() {
-		issueEmbed.init("#issue-embed", {
-			key: "5772a05f-0235-47d9-b2b4-96f4e9e77d33", 
-			position: "MIDDLE-BOTTOM"
-		});
-	};
+		if (window.issueEmbed) {
+			issueEmbed.init("#issue-embed", {
+				key: "5772a05f-0235-47d9-b2b4-96f4e9e77d33", 
+				position: "MIDDLE-BOTTOM"
+			});
+		}
+	}
