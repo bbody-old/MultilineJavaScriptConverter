@@ -5,7 +5,7 @@
 			"https://cdn.issueembed.dev/issue-embed.min.js"
 		],
 		"scripts_async": [
-			"//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"
+			"//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"
 		],
 		"scripts_async_production": [
 			"https://www.googletagmanager.com/gtag/js?id=UA-117132942-1"
