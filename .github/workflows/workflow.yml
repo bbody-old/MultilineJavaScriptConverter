@@ -18,7 +18,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: dist
-        key: ${{ runner.os }}-node-modules
+        key: ${{ hashFiles('./yarn.lock') }}-node-modules
     - name: Setup environment
       run: npm install && npm run setup
     - name: Cache Build
@@ -26,7 +26,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: dist
-        key: ${{ runner.os }}-build-cache
+        key: ${{ github.run_id }}-build-cache
     - name: Build
       run: npm run build
     - name: Serve assets
@@ -60,13 +60,13 @@ jobs:
         uses: actions/cache@v1
         with:
           path: dist
-          key: ${{ runner.os }}-node-modules
+          key: ${{ hashFiles('./yarn.lock') }}-node-modules
       - name: Cache Build
         id: build-cache
         uses: actions/cache@v1
         with:
           path: dist
-          key: ${{ runner.os }}-build-cache
+          key: ${{ github.run_id }}-build-cache
       - name: NPM Release
         if: success()
         uses: JS-DevTools/npm-publish@v1
@@ -86,13 +86,13 @@ jobs:
           uses: actions/cache@v1
           with:
             path: dist
-            key: ${{ runner.os }}-node-modules
+            key: ${{ hashFiles('./yarn.lock') }}-node-modules
         - name: Cache Build
           id: build-cache
           uses: actions/cache@v1
           with:
             path: dist
-            key: ${{ runner.os }}-build-cache
+            key: ${{ github.run_id }}-build-cache
         - name: Delete package.json
           run: rm package.json
         - name: GitHub Pages Deployment
@@ -101,5 +101,5 @@ jobs:
           with:
             branch: gh-pages
             folder: dist
-            clean: true
+            single-commit: true
             token: ${{ secrets.GITHUB_PAT }}
